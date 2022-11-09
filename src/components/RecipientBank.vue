@@ -1,5 +1,8 @@
 <template>
-  <img class="recipient-bank" :src="src" :alt="name" :title="name" />
+  <div class="recipient-bank">
+    <img class="image" :src="src" :alt="name" :title="name" />
+    <span class="recipient-bank__name">{{ name }}</span>
+  </div>
 </template>
 
 <script lang="ts">
@@ -39,8 +42,11 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style lang="scss">
 .recipient-bank {
-  width: 100px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
 }
 </style>

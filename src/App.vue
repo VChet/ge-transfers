@@ -2,44 +2,26 @@
   <main>
     <fieldset class="filters">
       <legend>Фильтры</legend>
-      <label>
-        Банк
-        <select v-model="filters.recipientBank">
-          <option value="">-</option>
-          <option value="Bank of Georgia">Bank of Georgia</option>
-          <option value="TBC">TBC</option>
-          <option value="Credo">Credo</option>
-          <option value="Liberty">Liberty</option>
-          <option value="Rico">Rico</option>
-          <option value="Cartu">Cartu</option>
-        </select>
-      </label>
-      <label>
-        Система переводов
-        <select v-model="filters.system">
-          <option value="">-</option>
-          <option value="Contact">Contact</option>
-          <option value="Unistream">Unistream</option>
-          <option value="KoronaPay">KoronaPay</option>
-        </select>
-      </label>
-      <label>
-        Тип получения
-        <select v-model="filters.receiveType">
-          <option value="">-</option>
-          <option value="Card">Перевод на карту</option>
-          <option value="Cash">В отделении</option>
-        </select>
-      </label>
-      <label>
-        Валюта
-        <select v-model="filters.receiveCurrency">
-          <option value="">-</option>
-          <option value="GEL">GEL</option>
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-        </select>
-      </label>
+      <InputSelect
+        v-model="filters.recipientBank"
+        label="Банк"
+        :items="['Bank of Georgia', 'TBC', 'Credo', 'Liberty', 'Rico', 'Cartu']"
+      />
+      <InputSelect
+        v-model="filters.system"
+        label="Система переводов"
+        :items="['Contact', 'Unistream', 'KoronaPay']"
+      />
+      <InputSelect
+        v-model="filters.receiveCurrency"
+        label="Валюта"
+        :items="['GEL', 'USD', 'EUR']"
+      />
+      <InputSelect
+        v-model="filters.receiveType"
+        label="Получение"
+        :items="['Card', 'Cash']"
+      />
     </fieldset>
     <ul v-if="filteredList" class="list">
       <EntryCard
@@ -61,6 +43,7 @@ import type {
   ReceiveType,
   TransferSystem,
 } from "@/assets/transfers";
+import InputSelect from "@/components/InputSelect.vue";
 import EntryCard from "@/components/EntryCard.vue";
 
 interface Filters {
@@ -71,7 +54,7 @@ interface Filters {
 }
 
 export default defineComponent({
-  components: { EntryCard },
+  components: { InputSelect, EntryCard },
   name: "App",
   setup() {
     const filters = reactive<Filters>({
@@ -117,16 +100,14 @@ export default defineComponent({
 <style lang="scss">
 .filters {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 12px;
-  padding: 0 20px 20px;
-  border: 1px solid #272727;
-  border-radius: 8px;
+  padding: 12px 20px 20px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
   margin-bottom: 12px;
-  label {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  legend {
+    font-size: 18px;
   }
 }
 .list {

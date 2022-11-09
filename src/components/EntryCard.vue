@@ -35,15 +35,18 @@ export default defineComponent({
 <style lang="scss">
 .entry-card {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px 0;
+  justify-items: center;
+  align-items: center;
   padding: 12px;
-  border: 1px solid #777777;
-  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  transition: transform 0.3s linear;
+  font-size: 20px;
   &__currency,
   &__type {
-    li {
-      font-size: 20px;
-    }
+    text-align: center;
   }
 }
 </style>

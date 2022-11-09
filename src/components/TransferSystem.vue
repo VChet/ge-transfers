@@ -1,5 +1,8 @@
 <template>
-  <img class="transfer-logo" :src="src" :alt="name" :title="name" />
+  <div class="transfer-system">
+    <img class="image" :src="src" :alt="name" :title="name" />
+    <span class="transfer-system__name">{{ name }}</span>
+  </div>
 </template>
 
 <script lang="ts">
@@ -33,8 +36,11 @@ export default defineComponent({
 });
 </script>
 
-<style>
-.transfer-logo {
-  width: 100px;
+<style lang="scss">
+.transfer-system {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
 }
 </style>
