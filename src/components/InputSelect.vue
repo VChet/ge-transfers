@@ -13,6 +13,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useVModel } from "@vueuse/core";
+import type { PropType } from "vue";
 
 export default defineComponent({
   name: "InputSelect",
@@ -26,7 +27,7 @@ export default defineComponent({
       required: true
     },
     items: {
-      type: Array,
+      type: Array as PropType<Record<string, any>[]>,
       required: true
     },
     itemValue: {
