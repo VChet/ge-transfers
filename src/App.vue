@@ -1,99 +1,53 @@
 <template>
   <main>
-    <fieldset class="filters">
-      <legend>Фильтры</legend>
-      <InputSelect
-        v-model="filters.recipientBank"
-        label="Банк"
-        :items="['Bank of Georgia', 'TBC', 'Credo', 'Liberty', 'Rico', 'Cartu']"
-      />
-      <InputSelect
-        v-model="filters.system"
-        label="Система переводов"
-        :items="['Contact', 'Unistream', 'KoronaPay']"
-      />
-      <InputSelect
-        v-model="filters.receiveCurrency"
-        label="Валюта"
-        :items="['GEL', 'USD', 'EUR']"
-      />
-      <InputSelect
-        v-model="filters.receiveType"
-        label="Получение"
-        :items="['Card', 'Cash']"
-      />
-    </fieldset>
+    <ListFilters v-model="filters" />
     <ul v-if="filteredList" class="list">
-      <EntryCard
-        v-for="(transfer, index) in filteredList"
-        :entry="transfer"
-        :key="index"
-      />
+      <EntryCard v-for="(transfer, index) in filteredList" :key="index" :entry="transfer" />
     </ul>
     <div v-else>Ничего не найдено</div>
   </main>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive } from "vue";
-import { transfers } from "@/assets/transfers";
-import type {
-  GeorgianBanks,
-  ReceiveCurrency,
-  ReceiveType,
-  TransferSystem,
-} from "@/assets/transfers";
-import InputSelect from "@/components/InputSelect.vue";
-import EntryCard from "@/components/EntryCard.vue";
+import { defineComponent, reactive } from "vue";
+import { useArrayFilter } from "@vueuse/core";
 
-interface Filters {
-  recipientBank: GeorgianBanks | "";
-  system: TransferSystem | "";
-  receiveType: ReceiveType | "";
-  receiveCurrency: ReceiveCurrency | "";
-}
+import ListFilters from "@/components/ListFilters.vue";
+import EntryCard from "@/components/EntryCard.vue";
+import { transfers } from "@/assets/transfers";
+import type { FilterValues } from "@/types/transfers";
 
 export default defineComponent({
-  components: { InputSelect, EntryCard },
   name: "App",
+  components: { ListFilters, EntryCard },
   setup() {
-    const filters = reactive<Filters>({
+    const filters = reactive<FilterValues>({
       recipientBank: "",
       system: "",
       receiveType: "",
-      receiveCurrency: "",
+      receiveCurrency: ""
     });
-    const filteredList = computed(() => {
-      return transfers.filter(
-        ({ recipientBank, system, receiveType, receiveCurrency }) => {
-          if (
-            filters.recipientBank &&
-            filters.recipientBank !== recipientBank
-          ) {
-            return false;
-          }
-          if (filters.system && filters.system !== system) {
-            return false;
-          }
-          if (
-            filters.receiveType &&
-            !receiveType.includes(filters.receiveType)
-          ) {
-            return false;
-          }
-          if (
-            filters.receiveCurrency &&
-            !receiveCurrency.includes(filters.receiveCurrency)
-          ) {
-            return false;
-          }
-          return true;
-        }
-      );
+    const filteredList = useArrayFilter(transfers, ({ recipientBank, system, receiveType, receiveCurrency }) => {
+      if (filters.recipientBank && filters.recipientBank !== recipientBank) {
+        return false;
+      }
+      if (filters.system && filters.system !== system) {
+        return false;
+      }
+      if (filters.receiveType && !receiveType.includes(filters.receiveType)) {
+        return false;
+      }
+      if (filters.receiveCurrency && !receiveCurrency.includes(filters.receiveCurrency)) {
+        return false;
+      }
+      return true;
     });
 
-    return { filters, filteredList };
-  },
+    return {
+      filters,
+      filteredList
+    };
+  }
 });
 </script>
 

@@ -3,42 +3,46 @@
     <div class="input-select__label">{{ label }}</div>
     <select v-model="model">
       <option value="">-</option>
-      <option v-for="(item, index) in items" :key="index" :value="item">
-        {{ item }}
+      <option v-for="(item, index) in items" :key="index" :value="item[itemValue]">
+        {{ item[itemText] }}
       </option>
     </select>
   </label>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { defineComponent } from "vue";
+import { useVModel } from "@vueuse/core";
 
 export default defineComponent({
   name: "InputSelect",
   props: {
     label: {
       type: String,
-      default: null,
+      default: null
     },
     modelValue: {
       type: [String, Number],
-      required: true,
+      required: true
     },
     items: {
       type: Array,
-      required: true,
+      required: true
     },
+    itemValue: {
+      type: String,
+      default: "value"
+    },
+    itemText: {
+      type: String,
+      default: "name"
+    }
   },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
-    const model = computed({
-      get: () => props.modelValue,
-      set: (value) => {
-        emit("update:modelValue", value);
-      },
-    });
+    const model = useVModel(props, "modelValue", emit);
     return { model };
-  },
+  }
 });
 </script>
 

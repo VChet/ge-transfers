@@ -20,22 +20,22 @@ const pwaOptions: Partial<VitePWAOptions> = {
       {
         src: "icon-192x192.png",
         sizes: "192x192",
-        type: "image/png",
+        type: "image/png"
+      },
+      {
+        src: "icon-512x512.png",
+        sizes: "512x512",
+        type: "image/png"
       },
       {
         src: "icon-512x512.png",
         sizes: "512x512",
         type: "image/png",
-      },
-      {
-        src: "icon-512x512.png",
-        sizes: "512x512",
-        type: "image/png",
-        purpose: "any maskable",
-      },
-    ],
+        purpose: "any maskable"
+      }
+    ]
   },
-  workbox: { sourcemap: true },
+  workbox: { sourcemap: true }
 };
 
 // https://vitejs.dev/config/
@@ -43,7 +43,7 @@ export default defineConfig({
   plugins: [vue(), VitePWA(pwaOptions)],
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
-    },
-  },
+      "@": fileURLToPath(new URL("./src", import.meta.url))
+    }
+  }
 });

@@ -8,15 +8,15 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import type { PropType } from "vue";
-import type { TransferSystem } from "@/assets/transfers";
+import type { TransferSystem } from "@/types/transfers";
 
 export default defineComponent({
   name: "TransferSystem",
   props: {
     name: {
       type: String as PropType<TransferSystem>,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(props) {
     const src = computed(() => {
@@ -32,7 +32,7 @@ export default defineComponent({
       }
     });
     return { src };
-  },
+  }
 });
 </script>
 

@@ -21,14 +21,14 @@ import TransferSystem from "@/components/TransferSystem.vue";
 import RecipientBank from "@/components/RecipientBank.vue";
 
 export default defineComponent({
-  components: { TransferSystem, RecipientBank },
   name: "EntryCard",
+  components: { TransferSystem, RecipientBank },
   props: {
     entry: {
       type: Object,
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 });
 </script>
 

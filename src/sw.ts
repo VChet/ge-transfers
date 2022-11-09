@@ -1,9 +1,5 @@
 import { clientsClaim } from "workbox-core";
-import {
-  cleanupOutdatedCaches,
-  createHandlerBoundToURL,
-  precacheAndRoute,
-} from "workbox-precaching";
+import { cleanupOutdatedCaches, createHandlerBoundToURL, precacheAndRoute } from "workbox-precaching";
 import { NavigationRoute, registerRoute } from "workbox-routing";
 import { CacheFirst } from "workbox-strategies";
 
@@ -16,10 +12,7 @@ precacheAndRoute(self.__WB_MANIFEST);
 cleanupOutdatedCaches();
 
 // to allow work offline
-registerRoute(
-  new NavigationRoute(createHandlerBoundToURL("index.html")),
-  new CacheFirst()
-);
+registerRoute(new NavigationRoute(createHandlerBoundToURL("index.html")), new CacheFirst());
 
 self.skipWaiting();
 clientsClaim();

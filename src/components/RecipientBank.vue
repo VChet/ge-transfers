@@ -8,15 +8,15 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 import type { PropType } from "vue";
-import type { GeorgianBanks } from "@/assets/transfers";
+import type { GeorgianBanks } from "@/types/transfers";
 
 export default defineComponent({
   name: "RecipientBank",
   props: {
     name: {
       type: String as PropType<GeorgianBanks>,
-      required: true,
-    },
+      required: true
+    }
   },
   setup(props) {
     const src = computed(() => {
@@ -38,7 +38,7 @@ export default defineComponent({
       }
     });
     return { src };
-  },
+  }
 });
 </script>
 

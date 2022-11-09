@@ -16,7 +16,7 @@ useRegisterSW({
   onRegisterError(error) {
     /* eslint-disable no-console */
     console.error(error);
-  },
+  }
 });
 
 createApp(App).mount("#app");
