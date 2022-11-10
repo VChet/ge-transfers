@@ -6,8 +6,8 @@ export type ReceiveCurrency = "GEL" | "USD" | "EUR";
 export interface Transfer {
   recipientBank: GeorgianBanks;
   system: TransferSystem;
-  receiveType: ReceiveType[];
-  receiveCurrency: ReceiveCurrency[];
+  receiveType: ReceiveType;
+  receiveCurrency: ReceiveCurrency;
 }
 
 export interface FilterValues {

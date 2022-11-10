@@ -1,17 +1,13 @@
 <template>
   <li class="entry-card">
-    <RecipientBank :name="entry.recipientBank" />
     <TransferSystem :name="entry.system" />
-    <ul class="entry-card__currency">
-      <li v-for="(currency, curIndex) in entry.receiveCurrency" :key="curIndex">
-        {{ currency }}
-      </li>
-    </ul>
-    <ul class="entry-card__type">
-      <li v-for="(type, typeIndex) in entry.receiveType" :key="typeIndex">
-        {{ type === "Cash" ? "В отделении" : "На карту" }}
-      </li>
-    </ul>
+    <RecipientBank :name="entry.recipientBank" />
+    <div class="entry-card__currency">
+      {{ entry.receiveCurrency }}
+    </div>
+    <div class="entry-card__type">
+      {{ entry.receiveType === "Cash" ? "В отделении" : "На карту" }}
+    </div>
   </li>
 </template>
 

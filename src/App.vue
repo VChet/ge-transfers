@@ -34,10 +34,10 @@ export default defineComponent({
       if (filters.system && filters.system !== system) {
         return false;
       }
-      if (filters.receiveType && !receiveType.includes(filters.receiveType)) {
+      if (filters.receiveType && filters.receiveType !== receiveType) {
         return false;
       }
-      if (filters.receiveCurrency && !receiveCurrency.includes(filters.receiveCurrency)) {
+      if (filters.receiveCurrency && filters.receiveCurrency !== receiveCurrency) {
         return false;
       }
       return true;
