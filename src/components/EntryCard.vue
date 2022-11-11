@@ -100,6 +100,9 @@ export default defineComponent({
   border-radius: var(--border-radius);
   transition: transform 0.3s linear;
   font-size: 20px;
+  &:hover {
+    box-shadow: 0 0 3px var(--highlight);
+  }
   > * {
     flex: 1;
     min-width: 150px;
