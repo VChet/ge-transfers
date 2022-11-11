@@ -124,6 +124,10 @@ export default defineComponent({
     align-items: flex-end;
     text-align: right;
     gap: 8px;
+    @media (max-width: 575px) {
+      align-items: center;
+      text-align: center;
+    }
     &-row {
       width: 100%;
       display: flex;
