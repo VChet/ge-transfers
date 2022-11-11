@@ -8,11 +8,34 @@
     <div class="entry-card__type">
       {{ entry.receiveType === "Cash" ? "В отделении" : "На карту" }}
     </div>
+    <div class="entry-card__feedback">
+      <template v-if="!leaveFeedback">
+        <div class="entry-card__feedback-count">
+          <div>
+            Не работает: <span class="entry-card__feedback-negative">{{ entry.downVotes }}</span>
+          </div>
+          <div>
+            Работает: <span class="entry-card__feedback-positive">{{ entry.upVotes }}</span>
+          </div>
+        </div>
+        <div>
+          <button type="button" @click="leaveFeedback = true">Оставить отзыв</button>
+        </div>
+      </template>
+      <template v-else>
+        <textarea ref="textareaRef" v-model="feedbackText" title="Вы можете оставить комментарий" />
+        <div class="entry-card__feedback-row">
+          <button type="button" :disabled="isSending" @click="sendFeedback(FeedbackVote.negative)">Не работает</button>
+          <button type="button" :disabled="isSending" @click="sendFeedback(FeedbackVote.positive)">Работает</button>
+        </div>
+      </template>
+    </div>
   </li>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { useTextareaAutosize } from "@vueuse/core";
 import type { PropType } from "vue";
 
 import TransferSystem from "@/components/TransferSystem.vue";
@@ -30,26 +53,35 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  emits: ["fetch"],
+  setup(props, { emit }) {
+    const { textarea: textareaRef, input: feedbackText } = useTextareaAutosize();
     const leaveFeedback = ref<boolean>(false);
-    const feedbackText = ref<string>("");
-    const sending = ref<boolean>(false);
+    const isSending = ref<boolean>(false);
 
     async function sendFeedback(vote: FeedbackVote) {
-      sending.value = true;
-      await sendMethodFeedback({
-        methodId: props.entry.id,
-        comment: feedbackText.value,
-        vote
-      });
-      sending.value = false;
+      isSending.value = true;
+      try {
+        await sendMethodFeedback({
+          methodId: props.entry.id,
+          comment: feedbackText.value ?? null,
+          vote
+        });
+        emit("fetch");
+        leaveFeedback.value = false;
+        feedbackText.value = "";
+      } catch (error) {
+        alert("Ошибка");
+      }
+      isSending.value = false;
     }
 
     return {
       FeedbackVote,
+      textareaRef,
       leaveFeedback,
       feedbackText,
-      sending,
+      isSending,
       sendFeedback
     };
   }
@@ -58,19 +90,48 @@ export default defineComponent({
 
 <style lang="scss">
 .entry-card {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 16px 0;
   justify-items: center;
   align-items: center;
-  padding: 12px;
+  padding: 12px 24px;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   transition: transform 0.3s linear;
   font-size: 20px;
+  > * {
+    flex: 1;
+    min-width: 150px;
+  }
   &__currency,
   &__type {
     text-align: center;
+  }
+  &__feedback {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    gap: 8px;
+    &-row {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      > button {
+        flex: 1;
+      }
+    }
+    &-count {
+      font-size: 16px;
+    }
+    &-negative {
+      color: #ff0000;
+    }
+    &-positive {
+      color: #008000;
+    }
   }
 }
 </style>

@@ -59,11 +59,12 @@ button {
   font-family: inherit;
   border: 1px solid var(--border-color);
   border-radius: 0.25em;
-  padding: 0.25em 0.5em;
+  padding: 0.5em 0.75em;
   font-size: 16px;
   cursor: pointer;
   outline: none;
   line-height: 1.1;
+  white-space: nowrap;
   background-color: var(--background);
   &:hover,
   &:focus-visible {
@@ -76,12 +77,14 @@ button {
 
 textarea {
   resize: vertical;
+  width: 100%;
   font-family: inherit;
   border: 1px solid var(--border-color);
   border-radius: 0.25em;
   padding: 0.5em;
   outline: none;
-  min-height: 100px;
+  min-height: 75px;
+  max-height: 200px;
   &:hover,
   &:focus-visible {
     outline: 1px solid var(--highlight);

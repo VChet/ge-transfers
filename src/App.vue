@@ -1,10 +1,10 @@
 <template>
   <main>
     <ListFilters v-model="filters" />
-    <ul v-if="filteredList.length && !isLoading" class="list">
-      <EntryCard v-for="transfer in filteredList" :key="transfer.id" :entry="transfer" />
+    <div v-if="isLoading && !filteredList.length" class="status-card">Загрузка...</div>
+    <ul v-else-if="filteredList.length" class="list">
+      <EntryCard v-for="transfer in filteredList" :key="transfer.id" :entry="transfer" @fetch="fetchData" />
     </ul>
-    <div v-else-if="isLoading" class="status-card">Загрузка...</div>
     <div v-else class="status-card">Ничего не найдено</div>
   </main>
 </template>
@@ -60,7 +60,8 @@ export default defineComponent({
     return {
       isLoading,
       filters,
-      filteredList
+      filteredList,
+      fetchData
     };
   }
 });

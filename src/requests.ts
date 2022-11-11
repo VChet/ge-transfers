@@ -9,6 +9,6 @@ export async function fetchTransfers() {
 }
 
 export async function sendMethodFeedback(payload: FeedbackRequest) {
-  const json = await ky.post(`${host}/PostFeedback`, { json: payload }).json();
+  const json = await ky.post(`${host}/TransferMethods/PostFeedback`, { json: payload, credentials: "include" }).json();
   return json;
 }
