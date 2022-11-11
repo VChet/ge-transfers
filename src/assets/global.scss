@@ -54,6 +54,39 @@ select {
   }
 }
 
+button {
+  appearance: none;
+  font-family: inherit;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  line-height: 1.1;
+  background-color: var(--background);
+  &:hover,
+  &:focus-visible {
+    outline: 1px solid var(--highlight);
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+textarea {
+  resize: vertical;
+  font-family: inherit;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25em;
+  padding: 0.5em;
+  outline: none;
+  min-height: 100px;
+  &:hover,
+  &:focus-visible {
+    outline: 1px solid var(--highlight);
+  }
+}
 
 #app {
   max-width: 1280px;

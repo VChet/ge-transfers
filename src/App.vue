@@ -4,7 +4,8 @@
     <ul v-if="filteredList.length && !isLoading" class="list">
       <EntryCard v-for="transfer in filteredList" :key="transfer.id" :entry="transfer" />
     </ul>
-    <div v-else>Ничего не найдено</div>
+    <div v-else-if="isLoading" class="status-card">Загрузка...</div>
+    <div v-else class="status-card">Ничего не найдено</div>
   </main>
 </template>
 
@@ -31,7 +32,9 @@ export default defineComponent({
     const isLoading = ref<boolean>(false);
     const transfers = ref<Transfer[]>([]);
     async function fetchData() {
+      isLoading.value = true;
       transfers.value = await fetchTransfers();
+      isLoading.value = false;
     }
     onMounted(fetchData);
 
@@ -80,5 +83,12 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+.status-card {
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  text-align: center;
+  font-size: 20px;
 }
 </style>

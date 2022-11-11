@@ -12,9 +12,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
+import type { PropType } from "vue";
+
 import TransferSystem from "@/components/TransferSystem.vue";
 import RecipientBank from "@/components/RecipientBank.vue";
+import { sendMethodFeedback } from "@/requests";
+import { FeedbackVote } from "@/types/transfersEnum";
 import type { Transfer } from "@/types/transfers";
 
 export default defineComponent({
@@ -25,6 +29,29 @@ export default defineComponent({
       type: Object as PropType<Transfer>,
       required: true
     }
+  },
+  setup(props) {
+    const leaveFeedback = ref<boolean>(false);
+    const feedbackText = ref<string>("");
+    const sending = ref<boolean>(false);
+
+    async function sendFeedback(vote: FeedbackVote) {
+      sending.value = true;
+      await sendMethodFeedback({
+        methodId: props.entry.id,
+        comment: feedbackText.value,
+        vote
+      });
+      sending.value = false;
+    }
+
+    return {
+      FeedbackVote,
+      leaveFeedback,
+      feedbackText,
+      sending,
+      sendFeedback
+    };
   }
 });
 </script>
