@@ -22,17 +22,17 @@ export default defineComponent({
     const src = computed(() => {
       switch (props.name) {
         case "Bank of Georgia":
-          return "/img/bog.png";
+          return "/img/bog.webp";
         case "TBC":
-          return "/img/tbc.png";
+          return "/img/tbc.webp";
         case "Credo":
-          return "/img/credo.png";
+          return "/img/credo.webp";
         case "Liberty":
-          return "/img/liberty.png";
+          return "/img/liberty.webp";
         case "Rico":
-          return "/img/rico.png";
+          return "/img/rico.webp";
         case "Cartu":
-          return "/img/cartu.png";
+          return "/img/cartu.webp";
         default:
           return props.name;
       }

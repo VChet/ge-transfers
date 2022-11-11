@@ -22,11 +22,11 @@ export default defineComponent({
     const src = computed(() => {
       switch (props.name) {
         case "Unistream":
-          return "/img/unistream.png";
+          return "/img/unistream.webp";
         case "Contact":
-          return "/img/contact.png";
+          return "/img/contact.webp";
         case "KoronaPay":
-          return "/img/koronapay.png";
+          return "/img/koronapay.webp";
         default:
           return props.name;
       }
