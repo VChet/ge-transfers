@@ -4,6 +4,7 @@
     <RecipientBank :name="entry.recipientBank" />
     <div class="transfer-card__currency">
       {{ entry.receiveCurrency }}
+      <CurrencyRate :name="entry.transferSystem" :currency="entry.receiveCurrency" />
     </div>
     <div class="transfer-card__type">
       <img
@@ -47,13 +48,14 @@ import type { PropType } from "vue";
 
 import TransferSystem from "@/components/TransferSystem.vue";
 import RecipientBank from "@/components/RecipientBank.vue";
+import CurrencyRate from "@/components/CurrencyRate.vue";
 import { sendMethodFeedback } from "@/requests";
 import { FeedbackVote } from "@/types/transfersEnum";
 import type { Transfer } from "@/types/transfers";
 
 export default defineComponent({
   name: "TransferCard",
-  components: { TransferSystem, RecipientBank },
+  components: { TransferSystem, RecipientBank, CurrencyRate },
   props: {
     entry: {
       type: Object as PropType<Transfer>,
