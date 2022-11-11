@@ -141,6 +141,8 @@ export default defineComponent({
     }
     &-count {
       font-size: 16px;
+      font-feature-settings: "tnum";
+      font-variant-numeric: tabular-nums;
     }
     &-negative {
       color: #ff0000;
