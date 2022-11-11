@@ -1,7 +1,7 @@
 <template>
   <fieldset class="list-filters">
     <legend>Фильтры</legend>
-    <InputSelect v-model="filters.system" label="Система переводов" :items="systemOptions" />
+    <InputSelect v-model="filters.transferSystem" label="Система переводов" :items="systemOptions" />
     <InputSelect v-model="filters.recipientBank" label="Банк" :items="bankOptions" />
     <InputSelect v-model="filters.receiveCurrency" label="Валюта" :items="currencyOptions" />
     <InputSelect v-model="filters.receiveType" label="Получение" :items="receiveOptions" />

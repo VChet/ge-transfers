@@ -1,6 +1,6 @@
 <template>
   <li class="entry-card">
-    <TransferSystem :name="entry.system" />
+    <TransferSystem :name="entry.transferSystem" />
     <RecipientBank :name="entry.recipientBank" />
     <div class="entry-card__currency">
       {{ entry.receiveCurrency }}
@@ -15,13 +15,14 @@
 import { defineComponent } from "vue";
 import TransferSystem from "@/components/TransferSystem.vue";
 import RecipientBank from "@/components/RecipientBank.vue";
+import type { Transfer } from "@/types/transfers";
 
 export default defineComponent({
   name: "EntryCard",
   components: { TransferSystem, RecipientBank },
   props: {
     entry: {
-      type: Object,
+      type: Object as PropType<Transfer>,
       required: true
     }
   }

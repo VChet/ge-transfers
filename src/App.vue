@@ -1,21 +1,21 @@
 <template>
   <main>
     <ListFilters v-model="filters" />
-    <ul v-if="filteredList" class="list">
-      <EntryCard v-for="(transfer, index) in filteredList" :key="index" :entry="transfer" />
+    <ul v-if="filteredList.length && !isLoading" class="list">
+      <EntryCard v-for="transfer in filteredList" :key="transfer.id" :entry="transfer" />
     </ul>
     <div v-else>Ничего не найдено</div>
   </main>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, ref, reactive, onMounted } from "vue";
 import { useArrayFilter } from "@vueuse/core";
 
 import ListFilters from "@/components/ListFilters.vue";
 import EntryCard from "@/components/EntryCard.vue";
-import { transfers } from "@/assets/transfers";
-import type { FilterValues } from "@/types/transfers";
+import { fetchTransfers } from "@/requests";
+import type { FilterValues, Transfer } from "@/types/transfers";
 
 export default defineComponent({
   name: "App",
@@ -23,27 +23,39 @@ export default defineComponent({
   setup() {
     const filters = reactive<FilterValues>({
       recipientBank: "",
-      system: "",
+      transferSystem: "",
       receiveType: "",
       receiveCurrency: ""
     });
-    const filteredList = useArrayFilter(transfers, ({ recipientBank, system, receiveType, receiveCurrency }) => {
-      if (filters.recipientBank && filters.recipientBank !== recipientBank) {
-        return false;
+
+    const isLoading = ref<boolean>(false);
+    const transfers = ref<Transfer[]>([]);
+    async function fetchData() {
+      transfers.value = await fetchTransfers();
+    }
+    onMounted(fetchData);
+
+    const filteredList = useArrayFilter(
+      transfers,
+      ({ recipientBank, transferSystem, receiveType, receiveCurrency }) => {
+        if (filters.recipientBank && filters.recipientBank !== recipientBank) {
+          return false;
+        }
+        if (filters.transferSystem && filters.transferSystem !== transferSystem) {
+          return false;
+        }
+        if (filters.receiveType && filters.receiveType !== receiveType) {
+          return false;
+        }
+        if (filters.receiveCurrency && filters.receiveCurrency !== receiveCurrency) {
+          return false;
+        }
+        return true;
       }
-      if (filters.system && filters.system !== system) {
-        return false;
-      }
-      if (filters.receiveType && filters.receiveType !== receiveType) {
-        return false;
-      }
-      if (filters.receiveCurrency && filters.receiveCurrency !== receiveCurrency) {
-        return false;
-      }
-      return true;
-    });
+    );
 
     return {
+      isLoading,
       filters,
       filteredList
     };

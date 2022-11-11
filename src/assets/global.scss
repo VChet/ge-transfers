@@ -48,7 +48,7 @@ select {
   outline: none;
   line-height: 1.1;
   background-color: var(--background);
-  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+  &:hover,
   &:focus-visible {
     outline: 1px solid var(--highlight);
   }
