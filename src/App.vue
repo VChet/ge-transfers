@@ -33,7 +33,8 @@ export default defineComponent({
     const transfers = ref<Transfer[]>([]);
     async function fetchData() {
       isLoading.value = true;
-      transfers.value = await fetchTransfers();
+      const data = await fetchTransfers();
+      transfers.value = data.sort((a, b) => b.upVotes - a.upVotes);
       isLoading.value = false;
     }
     onMounted(fetchData);
