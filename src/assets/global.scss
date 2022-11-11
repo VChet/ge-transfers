@@ -103,7 +103,4 @@ textarea {
   height: 100px;
   object-fit: contain;
   border-radius: var(--border-radius);
-  @media (max-width: 575px) {
-    width: 80px;
-  }
 }

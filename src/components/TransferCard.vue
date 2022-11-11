@@ -6,7 +6,14 @@
       {{ entry.receiveCurrency }}
     </div>
     <div class="transfer-card__type">
-      {{ entry.receiveType === "Cash" ? "В отделении" : "На карту" }}
+      <img
+        v-if="entry.receiveType === 'Cash'"
+        class="image"
+        src="/img/cash.webp"
+        alt="В отделении"
+        title="В отделении"
+      />
+      <img v-else class="image" src="/img/card.webp" alt="На карту" title="На карту" />
     </div>
     <div class="transfer-card__feedback">
       <template v-if="!leaveFeedback">
