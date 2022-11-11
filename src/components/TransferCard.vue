@@ -1,21 +1,21 @@
 <template>
-  <li class="entry-card">
+  <li class="transfer-card">
     <TransferSystem :name="entry.transferSystem" />
     <RecipientBank :name="entry.recipientBank" />
-    <div class="entry-card__currency">
+    <div class="transfer-card__currency">
       {{ entry.receiveCurrency }}
     </div>
-    <div class="entry-card__type">
+    <div class="transfer-card__type">
       {{ entry.receiveType === "Cash" ? "В отделении" : "На карту" }}
     </div>
-    <div class="entry-card__feedback">
+    <div class="transfer-card__feedback">
       <template v-if="!leaveFeedback">
-        <div class="entry-card__feedback-count">
+        <div class="transfer-card__feedback-count">
           <div>
-            Не работает: <span class="entry-card__feedback-negative">{{ entry.downVotes }}</span>
+            Не работает: <span class="transfer-card__feedback-negative">{{ entry.downVotes }}</span>
           </div>
           <div>
-            Работает: <span class="entry-card__feedback-positive">{{ entry.upVotes }}</span>
+            Работает: <span class="transfer-card__feedback-positive">{{ entry.upVotes }}</span>
           </div>
         </div>
         <div>
@@ -24,7 +24,7 @@
       </template>
       <template v-else>
         <textarea ref="textareaRef" v-model="feedbackText" title="Вы можете оставить комментарий" />
-        <div class="entry-card__feedback-row">
+        <div class="transfer-card__feedback-row">
           <button type="button" :disabled="isSending" @click="sendFeedback(FeedbackVote.negative)">Не работает</button>
           <button type="button" :disabled="isSending" @click="sendFeedback(FeedbackVote.positive)">Работает</button>
         </div>
@@ -45,7 +45,7 @@ import { FeedbackVote } from "@/types/transfersEnum";
 import type { Transfer } from "@/types/transfers";
 
 export default defineComponent({
-  name: "EntryCard",
+  name: "TransferCard",
   components: { TransferSystem, RecipientBank },
   props: {
     entry: {
@@ -89,7 +89,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.entry-card {
+.transfer-card {
   display: flex;
   flex-wrap: wrap;
   gap: 16px 0;

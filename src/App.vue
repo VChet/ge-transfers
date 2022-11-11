@@ -3,7 +3,7 @@
     <ListFilters v-model="filters" />
     <div v-if="isLoading && !filteredList.length" class="status-card">Загрузка...</div>
     <ul v-else-if="filteredList.length" class="list">
-      <EntryCard v-for="transfer in filteredList" :key="transfer.id" :entry="transfer" @fetch="fetchData" />
+      <TransferCard v-for="transfer in filteredList" :key="transfer.id" :entry="transfer" @fetch="fetchData" />
     </ul>
     <div v-else class="status-card">Ничего не найдено</div>
   </main>
@@ -14,13 +14,13 @@ import { defineComponent, ref, reactive, onMounted } from "vue";
 import { useArrayFilter } from "@vueuse/core";
 
 import ListFilters from "@/components/ListFilters.vue";
-import EntryCard from "@/components/EntryCard.vue";
+import TransferCard from "@/components/TransferCard.vue";
 import { fetchTransfers } from "@/requests";
 import type { FilterValues, Transfer } from "@/types/transfers";
 
 export default defineComponent({
   name: "App",
-  components: { ListFilters, EntryCard },
+  components: { ListFilters, TransferCard },
   setup() {
     const filters = reactive<FilterValues>({
       recipientBank: "",
