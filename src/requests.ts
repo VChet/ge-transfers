@@ -7,7 +7,7 @@ import type { UnistreamResponse } from "@/types/rates";
 const host = "https://ge-transfers.azurewebsites.net";
 
 export async function fetchTransfers() {
-  const json: Transfer[] = await ky.get(`${host}/TransferMethods`).json();
+  const json: Transfer[] = await ky.get(`${host}/TransferMethods`, { timeout: 20000 }).json();
   return json;
 }
 
@@ -25,6 +25,6 @@ export const UnistreamRate = useMemoize(async (currency: ReceiveCurrency) => {
     accepted_currency: "RUB",
     profile: "unistream_front"
   }).toString();
-  const json: UnistreamResponse = await ky.get(url).json();
+  const json: UnistreamResponse = await ky.get(url, { timeout: 20000 }).json();
   return json.fees[0].rate;
 });
