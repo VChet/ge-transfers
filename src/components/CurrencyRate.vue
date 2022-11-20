@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 
 import { UnistreamRate } from "@/requests";
 import type { PropType } from "vue";
@@ -22,20 +22,18 @@ export default defineComponent({
     }
   },
   setup(props) {
-    function fetchUnistreamRate() {
-      UnistreamRate(props.currency).then((value) => {
-        rate.value = value;
-      });
+    async function fetchUnistreamRate() {
+      const value = await UnistreamRate(props.currency);
+      rate.value = value;
+    }
+    function fetchRate() {
+      if (props.name === "Unistream") {
+        return fetchUnistreamRate();
+      }
     }
 
     const rate = ref<number | null>(null);
-    onMounted(() => {
-      switch (props.name) {
-        case "Unistream":
-          fetchUnistreamRate();
-          break;
-      }
-    });
+    watch(() => props.currency, fetchRate, { immediate: true });
 
     const currencyString = computed(() => {
       switch (props.currency) {
