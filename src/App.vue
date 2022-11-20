@@ -15,7 +15,7 @@ import { useArrayFilter } from "@vueuse/core";
 
 import ListFilters from "@/components/ListFilters.vue";
 import TransferCard from "@/components/TransferCard.vue";
-import { fetchTransfers } from "@/requests";
+import transfersData from "@/assets/transfers";
 import type { FilterValues, Transfer } from "@/types/transfers";
 
 export default defineComponent({
@@ -33,8 +33,7 @@ export default defineComponent({
     const transfers = ref<Transfer[]>([]);
     async function fetchData() {
       isLoading.value = true;
-      const data = await fetchTransfers();
-      transfers.value = data.sort((a, b) => b.upVotes - a.upVotes);
+      transfers.value = transfersData;
       isLoading.value = false;
     }
     onMounted(fetchData);

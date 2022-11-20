@@ -6,13 +6,13 @@ export type ReceiveType = "Card" | "Cash";
 export type ReceiveCurrency = "GEL" | "USD" | "EUR";
 
 export interface Transfer {
-  id: string;
+  id?: string;
   recipientBank: GeorgianBanks;
   transferSystem: TransferSystem;
   receiveType: ReceiveType;
   receiveCurrency: ReceiveCurrency;
-  upVotes: number;
-  downVotes: number;
+  upVotes?: number;
+  downVotes?: number;
 }
 
 export interface FilterValues {

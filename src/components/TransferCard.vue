@@ -16,7 +16,7 @@
       />
       <img v-else class="image" src="/img/card.webp" alt="На карту" title="На карту" />
     </div>
-    <div class="transfer-card__feedback">
+    <div v-if="entry.upVotes || entry.downVotes" class="transfer-card__feedback">
       <template v-if="!leaveFeedback">
         <div class="transfer-card__feedback-count">
           <div>
@@ -70,6 +70,9 @@ export default defineComponent({
 
     async function sendFeedback(vote: FeedbackVote) {
       isSending.value = true;
+      if (!props.entry.id) {
+        throw new Error("entry id is undefined");
+      }
       try {
         await sendMethodFeedback({
           methodId: props.entry.id,
