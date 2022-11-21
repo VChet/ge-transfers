@@ -10,8 +10,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, onMounted } from "vue";
-import { useArrayFilter } from "@vueuse/core";
+import { defineComponent, ref, onMounted } from "vue";
+import { useArrayFilter, useStorage } from "@vueuse/core";
 import { nanoid } from "nanoid";
 
 import ListFilters from "@/components/ListFilters.vue";
@@ -23,7 +23,7 @@ export default defineComponent({
   name: "App",
   components: { ListFilters, TransferCard },
   setup() {
-    const filters = reactive<FilterValues>({
+    const filters = useStorage<FilterValues>("filters", {
       recipientBank: "",
       transferSystem: "",
       receiveType: "",
@@ -42,16 +42,16 @@ export default defineComponent({
     const filteredList = useArrayFilter(
       transfers,
       ({ recipientBank, transferSystem, receiveType, receiveCurrency }) => {
-        if (filters.recipientBank && filters.recipientBank !== recipientBank) {
+        if (filters.value.recipientBank && filters.value.recipientBank !== recipientBank) {
           return false;
         }
-        if (filters.transferSystem && filters.transferSystem !== transferSystem) {
+        if (filters.value.transferSystem && filters.value.transferSystem !== transferSystem) {
           return false;
         }
-        if (filters.receiveType && filters.receiveType !== receiveType) {
+        if (filters.value.receiveType && filters.value.receiveType !== receiveType) {
           return false;
         }
-        if (filters.receiveCurrency && filters.receiveCurrency !== receiveCurrency) {
+        if (filters.value.receiveCurrency && filters.value.receiveCurrency !== receiveCurrency) {
           return false;
         }
         return true;
