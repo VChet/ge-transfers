@@ -12,6 +12,7 @@
 <script lang="ts">
 import { defineComponent, ref, reactive, onMounted } from "vue";
 import { useArrayFilter } from "@vueuse/core";
+import { nanoid } from "nanoid";
 
 import ListFilters from "@/components/ListFilters.vue";
 import TransferCard from "@/components/TransferCard.vue";
@@ -33,7 +34,7 @@ export default defineComponent({
     const transfers = ref<Transfer[]>([]);
     async function fetchData() {
       isLoading.value = true;
-      transfers.value = transfersData;
+      transfers.value = transfersData.map((entry) => ({ ...entry, id: entry.id ?? nanoid() }));
       isLoading.value = false;
     }
     onMounted(fetchData);
