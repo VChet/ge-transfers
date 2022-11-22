@@ -4,7 +4,7 @@ import { useMemoize } from "@vueuse/core";
 import type { FeedbackRequest, ReceiveCurrency, Transfer } from "@/types/transfers";
 import type { UnistreamResponse } from "@/types/rates";
 
-const host = "https://ge-transfers.azurewebsites.net";
+const host = "https://playground1.vps.webdock.cloud/getransfers/dyn";
 
 export async function fetchTransfers() {
   const json: Transfer[] = await ky.get(`${host}/TransferMethods`, { timeout: 20000 }).json();

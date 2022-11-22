@@ -6,6 +6,7 @@
       <TransferCard v-for="transfer in filteredList" :key="transfer.id" :entry="transfer" @fetch="fetchData" />
     </ul>
     <div v-else class="status-card">Ничего не найдено</div>
+    <LoadingSpinner v-show="isLoading" />
   </main>
 </template>
 
@@ -16,7 +17,10 @@ import { nanoid } from "nanoid";
 
 import ListFilters from "@/components/ListFilters.vue";
 import TransferCard from "@/components/TransferCard.vue";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
+
 import transfersData from "@/assets/transfers";
+import { fetchTransfers } from "@/requests";
 import type { FilterValues, Transfer } from "@/types/transfers";
 
 const filters = useStorage<FilterValues>("filters", {
@@ -30,8 +34,9 @@ const isLoading = ref<boolean>(false);
 const transfers = ref<Transfer[]>(transfersData);
 async function fetchData() {
   isLoading.value = true;
-  transfers.value = transfersData.map((entry) => ({ ...entry, id: entry.id ?? nanoid() }));
-  isLoading.value = false;
+  transfers.value = await fetchTransfers().finally(() => {
+    isLoading.value = false;
+  });
 }
 fetchData();
 

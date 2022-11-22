@@ -16,7 +16,7 @@
       />
       <img v-else class="image" src="/img/card.webp" alt="На карту" title="На карту" />
     </div>
-    <div v-if="entry.upVotes || entry.downVotes" class="transfer-card__feedback">
+    <div v-if="'upVotes' in entry && 'downVotes' in entry" class="transfer-card__feedback">
       <template v-if="!leaveFeedback">
         <div class="transfer-card__feedback-count">
           <div>

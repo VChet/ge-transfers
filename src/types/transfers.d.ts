@@ -13,6 +13,7 @@ export interface Transfer {
   receiveCurrency: ReceiveCurrency;
   upVotes?: number;
   downVotes?: number;
+  rating?: number;
 }
 
 export interface FilterValues {
