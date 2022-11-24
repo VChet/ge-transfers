@@ -74,7 +74,7 @@ export default defineComponent({
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 12px;
   padding: 12px 20px 20px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   margin-bottom: 12px;
   legend {
@@ -88,7 +88,7 @@ export default defineComponent({
 }
 .status-card {
   padding: 12px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   text-align: center;
   font-size: 20px;

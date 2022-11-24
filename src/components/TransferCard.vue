@@ -108,7 +108,7 @@ export default defineComponent({
   justify-items: center;
   align-items: center;
   padding: 12px 24px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   transition: transform 0.3s linear;
   font-size: 20px;
@@ -148,10 +148,10 @@ export default defineComponent({
       font-variant-numeric: tabular-nums;
     }
     &-negative {
-      color: #ff0000;
+      color: var(--color-negative);
     }
     &-positive {
-      color: #008000;
+      color: var(--color-positive);
     }
   }
 }
