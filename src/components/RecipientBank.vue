@@ -5,39 +5,27 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from "vue";
-import type { PropType } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 import type { GeorgianBanks } from "@/types/transfers";
 
-export default defineComponent({
-  name: "RecipientBank",
-  props: {
-    name: {
-      type: String as PropType<GeorgianBanks>,
-      required: true
-    }
-  },
-  setup(props) {
-    const src = computed(() => {
-      switch (props.name) {
-        case "Bank of Georgia":
-          return "/img/bog.webp";
-        case "TBC":
-          return "/img/tbc.webp";
-        case "Credo":
-          return "/img/credo.webp";
-        case "Liberty":
-          return "/img/liberty.webp";
-        case "Rico":
-          return "/img/rico.webp";
-        case "Cartu":
-          return "/img/cartu.webp";
-        default:
-          return props.name;
-      }
-    });
-    return { src };
+const props = defineProps<{ name: GeorgianBanks }>();
+const src = computed(() => {
+  switch (props.name) {
+    case "Bank of Georgia":
+      return "/img/bog.webp";
+    case "TBC":
+      return "/img/tbc.webp";
+    case "Credo":
+      return "/img/credo.webp";
+    case "Liberty":
+      return "/img/liberty.webp";
+    case "Rico":
+      return "/img/rico.webp";
+    case "Cartu":
+      return "/img/cartu.webp";
+    default:
+      return props.name;
   }
 });
 </script>

@@ -10,41 +10,26 @@
   </label>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { useVModel } from "@vueuse/core";
-import type { PropType } from "vue";
 
-export default defineComponent({
-  name: "InputSelect",
-  props: {
-    label: {
-      type: String,
-      default: null
-    },
-    modelValue: {
-      type: [String, Number],
-      required: true
-    },
-    items: {
-      type: Array as PropType<Record<string, any>[]>,
-      required: true
-    },
-    itemValue: {
-      type: String,
-      default: "value"
-    },
-    itemText: {
-      type: String,
-      default: "name"
-    }
-  },
-  emits: ["update:modelValue"],
-  setup(props, { emit }) {
-    const model = useVModel(props, "modelValue", emit);
-    return { model };
+const props = withDefaults(
+  defineProps<{
+    label?: string | null;
+    modelValue: string | number;
+    items: Record<string, any>[];
+    itemValue?: string;
+    itemText?: string;
+  }>(),
+  {
+    label: null,
+    itemValue: "value",
+    itemText: "name"
   }
-});
+);
+
+const emit = defineEmits<{ (e: "update:modelValue", value: number): void }>();
+const model = useVModel(props, "modelValue", emit);
 </script>
 
 <style lang="scss">

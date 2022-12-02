@@ -41,10 +41,9 @@
   </li>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 import { useTextareaAutosize } from "@vueuse/core";
-import type { PropType } from "vue";
 
 import TransferSystem from "@/components/TransferSystem.vue";
 import RecipientBank from "@/components/RecipientBank.vue";
@@ -53,51 +52,31 @@ import { sendMethodFeedback } from "@/requests";
 import { FeedbackVote } from "@/types/transfersEnum";
 import type { Transfer } from "@/types/transfers";
 
-export default defineComponent({
-  name: "TransferCard",
-  components: { TransferSystem, RecipientBank, CurrencyRate },
-  props: {
-    entry: {
-      type: Object as PropType<Transfer>,
-      required: true
-    }
-  },
-  emits: ["fetch"],
-  setup(props, { emit }) {
-    const { textarea: textareaRef, input: feedbackText } = useTextareaAutosize();
-    const leaveFeedback = ref<boolean>(false);
-    const isSending = ref<boolean>(false);
+const props = defineProps<{ entry: Transfer }>();
+const emit = defineEmits<{ (e: "fetch"): void }>();
+const { textarea: textareaRef, input: feedbackText } = useTextareaAutosize();
+const leaveFeedback = ref<boolean>(false);
+const isSending = ref<boolean>(false);
 
-    async function sendFeedback(vote: FeedbackVote) {
-      isSending.value = true;
-      if (!props.entry.id) {
-        throw new Error("entry id is undefined");
-      }
-      try {
-        await sendMethodFeedback({
-          methodId: props.entry.id,
-          comment: feedbackText.value ?? null,
-          vote
-        });
-        emit("fetch");
-        leaveFeedback.value = false;
-        feedbackText.value = "";
-      } catch (error) {
-        alert("Ошибка");
-      }
-      isSending.value = false;
-    }
-
-    return {
-      FeedbackVote,
-      textareaRef,
-      leaveFeedback,
-      feedbackText,
-      isSending,
-      sendFeedback
-    };
+async function sendFeedback(vote: FeedbackVote) {
+  isSending.value = true;
+  if (!props.entry.id) {
+    throw new Error("entry id is undefined");
   }
-});
+  try {
+    await sendMethodFeedback({
+      methodId: props.entry.id,
+      comment: feedbackText.value ?? null,
+      vote
+    });
+    emit("fetch");
+    leaveFeedback.value = false;
+    feedbackText.value = "";
+  } catch (error) {
+    alert("Ошибка");
+  }
+  isSending.value = false;
+}
 </script>
 
 <style lang="scss">

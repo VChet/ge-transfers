@@ -9,9 +9,9 @@
   </main>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, onMounted } from "vue";
-import { useArrayFilter, useStorage } from "@vueuse/core";
+<script setup lang="ts">
+import { ref, onMounted, computed } from "vue";
+import { useStorage } from "@vueuse/core";
 import { nanoid } from "nanoid";
 
 import ListFilters from "@/components/ListFilters.vue";
@@ -19,53 +19,46 @@ import TransferCard from "@/components/TransferCard.vue";
 import transfersData from "@/assets/transfers";
 import type { FilterValues, Transfer } from "@/types/transfers";
 
-export default defineComponent({
-  name: "App",
-  components: { ListFilters, TransferCard },
-  setup() {
-    const filters = useStorage<FilterValues>("filters", {
-      recipientBank: "",
-      transferSystem: "",
-      receiveType: "",
-      receiveCurrency: ""
-    });
-
-    const isLoading = ref<boolean>(false);
-    const transfers = ref<Transfer[]>([]);
-    async function fetchData() {
-      isLoading.value = true;
-      transfers.value = transfersData.map((entry) => ({ ...entry, id: entry.id ?? nanoid() }));
-      isLoading.value = false;
-    }
-    onMounted(fetchData);
-
-    const filteredList = useArrayFilter(
-      transfers,
-      ({ recipientBank, transferSystem, receiveType, receiveCurrency }) => {
-        if (filters.value.recipientBank && filters.value.recipientBank !== recipientBank) {
-          return false;
-        }
-        if (filters.value.transferSystem && filters.value.transferSystem !== transferSystem) {
-          return false;
-        }
-        if (filters.value.receiveType && filters.value.receiveType !== receiveType) {
-          return false;
-        }
-        if (filters.value.receiveCurrency && filters.value.receiveCurrency !== receiveCurrency) {
-          return false;
-        }
-        return true;
-      }
-    );
-
-    return {
-      isLoading,
-      filters,
-      filteredList,
-      fetchData
-    };
-  }
+const filters = useStorage<FilterValues>("filters", {
+  recipientBank: "",
+  transferSystem: "",
+  receiveType: "",
+  receiveCurrency: ""
 });
+
+const isLoading = ref<boolean>(false);
+const transfers = ref<Transfer[]>(transfersData);
+async function fetchData() {
+  isLoading.value = true;
+  transfers.value = transfersData.map((entry) => ({ ...entry, id: entry.id ?? nanoid() }));
+  isLoading.value = false;
+}
+onMounted(fetchData);
+
+const filteredList = computed(() =>
+  transfers.value
+    .filter(({ recipientBank, transferSystem, receiveType, receiveCurrency }) => {
+      if (filters.value.recipientBank && filters.value.recipientBank !== recipientBank) {
+        return false;
+      }
+      if (filters.value.transferSystem && filters.value.transferSystem !== transferSystem) {
+        return false;
+      }
+      if (filters.value.receiveType && filters.value.receiveType !== receiveType) {
+        return false;
+      }
+      if (filters.value.receiveCurrency && filters.value.receiveCurrency !== receiveCurrency) {
+        return false;
+      }
+      return true;
+    })
+    .map((entry) => ({
+      ...entry,
+      id: entry.id ?? nanoid(),
+      rating: (entry.upVotes ?? 0) - (entry.downVotes ?? 0)
+    }))
+    .sort((a, b) => a.rating - b.rating)
+);
 </script>
 
 <style lang="scss">

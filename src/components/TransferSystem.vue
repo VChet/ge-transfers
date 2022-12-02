@@ -5,33 +5,21 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent } from "vue";
-import type { PropType } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 import type { TransferSystem } from "@/types/transfers";
 
-export default defineComponent({
-  name: "TransferSystem",
-  props: {
-    name: {
-      type: String as PropType<TransferSystem>,
-      required: true
-    }
-  },
-  setup(props) {
-    const src = computed(() => {
-      switch (props.name) {
-        case "Unistream":
-          return "/img/unistream.webp";
-        case "Contact":
-          return "/img/contact.webp";
-        case "KoronaPay":
-          return "/img/koronapay.webp";
-        default:
-          return props.name;
-      }
-    });
-    return { src };
+const props = defineProps<{ name: TransferSystem }>();
+const src = computed(() => {
+  switch (props.name) {
+    case "Unistream":
+      return "/img/unistream.webp";
+    case "Contact":
+      return "/img/contact.webp";
+    case "KoronaPay":
+      return "/img/koronapay.webp";
+    default:
+      return props.name;
   }
 });
 </script>
