@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, ref } from "vue";
 
 import { UnistreamRate } from "@/requests";
 import type { ReceiveCurrency, TransferSystem } from "@/types/transfers";
@@ -20,7 +20,7 @@ function fetchRate() {
   }
 }
 const rate = ref<number | null>(null);
-onMounted(fetchRate);
+fetchRate();
 
 const currencyString = computed(() => {
   switch (props.currency) {

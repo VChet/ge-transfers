@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from "vue";
+import { ref, computed } from "vue";
 import { useStorage } from "@vueuse/core";
 import { nanoid } from "nanoid";
 
@@ -33,7 +33,7 @@ async function fetchData() {
   transfers.value = transfersData.map((entry) => ({ ...entry, id: entry.id ?? nanoid() }));
   isLoading.value = false;
 }
-onMounted(fetchData);
+fetchData();
 
 const filteredList = computed(() =>
   transfers.value
