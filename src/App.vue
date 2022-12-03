@@ -62,7 +62,7 @@ const filteredList = computed(() =>
       id: entry.id ?? nanoid(),
       rating: (entry.upVotes ?? 0) - (entry.downVotes ?? 0)
     }))
-    .sort((a, b) => a.rating - b.rating)
+    .sort((a, b) => b.rating - a.rating)
 );
 </script>
 
