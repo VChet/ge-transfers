@@ -15,7 +15,18 @@ module.exports = {
   },
   ignorePatterns: ["dist"],
   rules: {
-    "prettier/prettier": ["error", { printWidth: 120 }],
+    "prettier/prettier": [
+      "error",
+      {
+        trailingComma: "none",
+        tabWidth: 2,
+        semi: true,
+        singleQuote: false,
+        printWidth: 120,
+        bracketSpacing: true,
+        endOfLine: "auto"
+      }
+    ],
     "max-len": ["error", { code: 120, ignoreUrls: true }]
   }
 };
