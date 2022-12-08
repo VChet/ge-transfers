@@ -14,5 +14,13 @@ cleanupOutdatedCaches();
 // to allow work offline
 registerRoute(new NavigationRoute(createHandlerBoundToURL("index.html")), new CacheFirst());
 
+// assets caching
+const imageExtensions = [".png", ".jpg", ".jpeg", ".svg", ".webp"];
+const fontExtensions = [".woff", ".woff2"];
+registerRoute(
+  ({ request }) => [...imageExtensions, ...fontExtensions].some((ext) => request.url.endsWith(ext)),
+  new CacheFirst()
+);
+
 self.skipWaiting();
 clientsClaim();
