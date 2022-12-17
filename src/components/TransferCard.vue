@@ -81,8 +81,8 @@ async function sendFeedback(vote: FeedbackVote) {
 
 <style lang="scss">
 .transfer-card {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 16px 0;
   justify-items: center;
   align-items: center;
@@ -94,19 +94,14 @@ async function sendFeedback(vote: FeedbackVote) {
   &:hover {
     box-shadow: 0 0 3px var(--highlight);
   }
-  > * {
-    flex: 1;
-    min-width: 150px;
-  }
   &__currency,
-  &__type {
+  &__type,
+  &__feedback {
     text-align: center;
   }
   &__feedback {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    text-align: right;
     gap: 8px;
     @media (max-width: 575px) {
       align-items: center;
@@ -132,6 +127,20 @@ async function sendFeedback(vote: FeedbackVote) {
     &-positive {
       color: var(--color-positive);
     }
+  }
+  @media (max-width: 850px) {
+    grid-template-columns: repeat(2, 1fr);
+    &__feedback {
+      grid-column: 1 / -1;
+      &-count {
+        font-size: inherit;
+      }
+    }
+  }
+  @media (max-width: 500px) {
+    padding: 12px 16px;
+    gap: 6px 12px;
+    font-size: 14px;
   }
 }
 </style>

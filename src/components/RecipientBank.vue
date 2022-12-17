@@ -36,5 +36,6 @@ const src = computed(() => {
   flex-direction: column;
   gap: 4px;
   align-items: center;
+  text-align: center;
 }
 </style>

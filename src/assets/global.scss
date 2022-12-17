@@ -80,6 +80,9 @@ button {
   &:active {
     transform: scale(0.95);
   }
+  @media (max-width: 500px) {
+    font-size: 12px;
+  }
 }
 
 textarea {
@@ -110,6 +113,10 @@ textarea {
   height: 100px;
   object-fit: contain;
   border-radius: var(--border-radius);
+  @media (max-width: 500px) {
+    width: 65px;
+    height: 65px;
+  }
 }
 
 .v-enter-active,

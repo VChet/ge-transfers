@@ -54,5 +54,8 @@ const receiveOptions: { name: string; value: ReceiveType }[] = [
   legend {
     font-size: 18px;
   }
+  @media (max-width: 500px) {
+    padding: 6px 10px 10px;
+  }
 }
 </style>
