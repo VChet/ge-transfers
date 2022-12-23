@@ -1,0 +1,10 @@
+[[redirects]]
+  force = true
+  from = '/api/*'
+  to = 'https://playground1.vps.webdock.cloud/getransfers/dyn/:splat'
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
