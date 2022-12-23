@@ -1,16 +1,17 @@
 import ky from "ky";
 import { useMemoize } from "@vueuse/core";
 
-import type { FeedbackRequest, ReceiveCurrency, Transfer } from "@/types/transfers";
+import type { ReceiveCurrency } from "@/types/transfers";
 import type { UnistreamResponse } from "@/types/rates";
+import type { PostFeedBackRequest, TransferMethodsResponse } from "@/types/api";
 
 const service = ky.create({ timeout: 20000 });
 
-export async function fetchTransfers(): Promise<Transfer[]> {
+export async function fetchTransfers(): Promise<TransferMethodsResponse> {
   return service.get("/api/TransferMethods").json();
 }
 
-export async function sendMethodFeedback(json: FeedbackRequest) {
+export async function postFeedback(json: PostFeedBackRequest) {
   return service.post("/api/TransferMethods/PostFeedback", { json, credentials: "include" }).json();
 }
 

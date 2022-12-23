@@ -48,7 +48,7 @@ import { useTextareaAutosize } from "@vueuse/core";
 import TransferSystem from "@/components/TransferSystem.vue";
 import RecipientBank from "@/components/RecipientBank.vue";
 import CurrencyRate from "@/components/CurrencyRate.vue";
-import { sendMethodFeedback } from "@/requests";
+import { postFeedback } from "@/requests";
 import { FeedbackVote } from "@/types/transfersEnum";
 import type { Transfer } from "@/types/transfers";
 
@@ -64,7 +64,7 @@ async function sendFeedback(vote: FeedbackVote) {
     throw new Error("entry id is undefined");
   }
   try {
-    await sendMethodFeedback({
+    await postFeedback({
       methodId: props.entry.id,
       comment: feedbackText.value ?? null,
       vote

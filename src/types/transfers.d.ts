@@ -22,9 +22,3 @@ export interface FilterValues {
   receiveType: ReceiveType | "";
   receiveCurrency: ReceiveCurrency | "";
 }
-
-export interface FeedbackRequest {
-  methodId: string;
-  comment: string | null;
-  vote: FeedbackVote;
-}
