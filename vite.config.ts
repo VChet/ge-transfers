@@ -45,5 +45,14 @@ export default defineConfig({
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url))
     }
+  },
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://playground1.vps.webdock.cloud/getransfers/dyn",
+        rewrite: (path) => path.replace(/^\/api/, ""),
+        changeOrigin: true
+      }
+    }
   }
 });
