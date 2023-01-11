@@ -2,9 +2,9 @@
   <main>
     <ListFilters v-model="filters" />
     <div v-if="isLoading && !filteredList.length" class="status-card">Загрузка...</div>
-    <ul v-else-if="filteredList.length" class="list">
+    <TransitionGroup v-else-if="filteredList.length" name="list" class="list" tag="ul">
       <TransferCard v-for="transfer in filteredList" :key="transfer.id" :entry="transfer" @fetch="fetchData" />
-    </ul>
+    </TransitionGroup>
     <div v-else class="status-card">Ничего не найдено</div>
     <LoadingSpinner v-show="isLoading" />
   </main>
@@ -83,6 +83,20 @@ const filteredList = computed(() =>
   display: flex;
   flex-direction: column;
   gap: 12px;
+  &-move,
+  &-enter-active,
+  &-leave-active {
+    transition: transform 0.3s ease-out, opacity 0.1s ease-in;
+  }
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: translateY(30vh);
+  }
+  &-leave-active {
+    position: absolute;
+    width: 100%;
+  }
 }
 .status-card {
   padding: 12px;

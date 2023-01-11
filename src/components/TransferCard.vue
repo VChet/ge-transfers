@@ -91,6 +91,7 @@ async function sendFeedback(vote: FeedbackVote) {
   border-radius: var(--border-radius);
   transition: transform 0.3s linear;
   font-size: 20px;
+  will-change: transform, opacity;
   &:hover {
     box-shadow: 0 0 3px var(--highlight);
   }
