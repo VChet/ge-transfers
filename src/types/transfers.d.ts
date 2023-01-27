@@ -1,5 +1,3 @@
-import type { FeedbackVote } from "@/types/transfersEnum";
-
 export type GeorgianBanks = "Bank of Georgia" | "TBC" | "Credo" | "Liberty" | "Rico" | "Cartu";
 export type TransferSystem = "Contact" | "Unistream" | "KoronaPay";
 export type ReceiveType = "Card" | "Cash";
