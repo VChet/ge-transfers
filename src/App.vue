@@ -42,19 +42,12 @@ fetchData();
 
 const filteredList = computed(() =>
   transfers.value
-    .filter(({ recipientBank, transferSystem, receiveType, receiveCurrency }) => {
-      if (filters.value.recipientBank && filters.value.recipientBank !== recipientBank) {
-        return false;
-      }
-      if (filters.value.transferSystem && filters.value.transferSystem !== transferSystem) {
-        return false;
-      }
-      if (filters.value.receiveType && filters.value.receiveType !== receiveType) {
-        return false;
-      }
-      if (filters.value.receiveCurrency && filters.value.receiveCurrency !== receiveCurrency) {
-        return false;
-      }
+    .filter(({ recipientBank, transferSystem, receiveType, receiveCurrency, disabled }) => {
+      if (disabled) return false;
+      if (filters.value.recipientBank && filters.value.recipientBank !== recipientBank) return false;
+      if (filters.value.transferSystem && filters.value.transferSystem !== transferSystem) return false;
+      if (filters.value.receiveType && filters.value.receiveType !== receiveType) return false;
+      if (filters.value.receiveCurrency && filters.value.receiveCurrency !== receiveCurrency) return false;
       return true;
     })
     .map((entry) => ({

@@ -29,13 +29,15 @@ const transfers: Transfer[] = [
     recipientBank: "TBC",
     transferSystem: "Contact",
     receiveType: "Card",
-    receiveCurrency: "USD"
+    receiveCurrency: "USD",
+    disabled: true
   },
   {
     recipientBank: "TBC",
     transferSystem: "Contact",
     receiveType: "Card",
-    receiveCurrency: "EUR"
+    receiveCurrency: "EUR",
+    disabled: true
   },
   {
     recipientBank: "TBC",
@@ -107,13 +109,15 @@ const transfers: Transfer[] = [
     recipientBank: "Credo",
     transferSystem: "Contact",
     receiveType: "Card",
-    receiveCurrency: "USD"
+    receiveCurrency: "USD",
+    disabled: true
   },
   {
     recipientBank: "Credo",
     transferSystem: "Contact",
     receiveType: "Card",
-    receiveCurrency: "EUR"
+    receiveCurrency: "EUR",
+    disabled: true
   },
   {
     recipientBank: "Credo",
@@ -125,13 +129,15 @@ const transfers: Transfer[] = [
     recipientBank: "Credo",
     transferSystem: "Contact",
     receiveType: "Cash",
-    receiveCurrency: "USD"
+    receiveCurrency: "USD",
+    disabled: true
   },
   {
     recipientBank: "Credo",
     transferSystem: "Contact",
     receiveType: "Cash",
-    receiveCurrency: "EUR"
+    receiveCurrency: "EUR",
+    disabled: true
   },
   {
     recipientBank: "Credo",
@@ -155,13 +161,15 @@ const transfers: Transfer[] = [
     recipientBank: "Bank of Georgia",
     transferSystem: "Contact",
     receiveType: "Card",
-    receiveCurrency: "EUR"
+    receiveCurrency: "EUR",
+    disabled: true
   },
   {
     recipientBank: "Bank of Georgia",
     transferSystem: "Contact",
     receiveType: "Card",
-    receiveCurrency: "USD"
+    receiveCurrency: "USD",
+    disabled: true
   },
   {
     recipientBank: "Liberty",
