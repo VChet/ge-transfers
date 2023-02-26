@@ -29,8 +29,7 @@ const transfers: Transfer[] = [
     recipientBank: "TBC",
     transferSystem: "Contact",
     receiveType: "Card",
-    receiveCurrency: "USD",
-    disabled: true
+    receiveCurrency: "USD"
   },
   {
     recipientBank: "TBC",
@@ -109,8 +108,7 @@ const transfers: Transfer[] = [
     recipientBank: "Credo",
     transferSystem: "Contact",
     receiveType: "Card",
-    receiveCurrency: "USD",
-    disabled: true
+    receiveCurrency: "USD"
   },
   {
     recipientBank: "Credo",
@@ -129,8 +127,7 @@ const transfers: Transfer[] = [
     recipientBank: "Credo",
     transferSystem: "Contact",
     receiveType: "Cash",
-    receiveCurrency: "USD",
-    disabled: true
+    receiveCurrency: "USD"
   },
   {
     recipientBank: "Credo",
@@ -168,8 +165,7 @@ const transfers: Transfer[] = [
     recipientBank: "Bank of Georgia",
     transferSystem: "Contact",
     receiveType: "Card",
-    receiveCurrency: "USD",
-    disabled: true
+    receiveCurrency: "USD"
   },
   {
     recipientBank: "Liberty",
