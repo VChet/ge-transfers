@@ -5,22 +5,11 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 
-import { UnistreamRate } from "@/requests";
 import type { ReceiveCurrency, TransferSystem } from "@/types/transfers";
 
 const props = defineProps<{ name: TransferSystem; currency: ReceiveCurrency }>();
 
-async function fetchUnistreamRate() {
-  const value = await UnistreamRate(props.currency);
-  rate.value = value;
-}
-function fetchRate() {
-  if (props.name === "Unistream") {
-    return fetchUnistreamRate();
-  }
-}
 const rate = ref<number | null>(null);
-fetchRate();
 
 const currencyString = computed(() => {
   switch (props.currency) {
