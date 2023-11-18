@@ -1,20 +1,17 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.web.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
+    "moduleResolution": "node",
     "useDefineForClassFields": true,
     "strict": true,
     "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "types": ["vite/client", "vite-plugin-pwa/client"],
     "lib": ["esnext", "dom", "dom.iterable", "scripthost", "WebWorker"],
     "paths": { "@/*": ["./src/*"] }
-  },
-
-  "references": [
-    {
-      "path": "./tsconfig.config.json"
-    }
-  ]
+  }
 }

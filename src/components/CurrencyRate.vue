@@ -4,7 +4,6 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
-
 import type { ReceiveCurrency, TransferSystem } from "@/types/transfers";
 
 const props = defineProps<{ name: TransferSystem; currency: ReceiveCurrency }>();

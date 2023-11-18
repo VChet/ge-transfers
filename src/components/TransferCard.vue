@@ -1,10 +1,10 @@
 <template>
   <li class="transfer-card">
-    <TransferSystem :name="entry.transferSystem" />
-    <RecipientBank :name="entry.recipientBank" />
+    <transfer-system :name="entry.transferSystem" />
+    <recipient-bank :name="entry.recipientBank" />
     <div class="transfer-card__currency">
       {{ entry.receiveCurrency }}
-      <CurrencyRate :name="entry.transferSystem" :currency="entry.receiveCurrency" />
+      <currency-rate :name="entry.transferSystem" :currency="entry.receiveCurrency" />
     </div>
     <div class="transfer-card__type">
       <img
@@ -44,7 +44,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useTextareaAutosize } from "@vueuse/core";
-
 import TransferSystem from "@/components/TransferSystem.vue";
 import RecipientBank from "@/components/RecipientBank.vue";
 import CurrencyRate from "@/components/CurrencyRate.vue";

@@ -1,6 +1,5 @@
 import ky from "ky";
 import { useMemoize } from "@vueuse/core";
-
 import type { ReceiveCurrency } from "@/types/transfers";
 import type { UnistreamResponse } from "@/types/rates";
 import type { PostFeedBackRequest, TransferMethodsResponse } from "@/types/api";

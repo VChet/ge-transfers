@@ -1,9 +1,7 @@
 import { createApp } from "vue";
-import App from "./App.vue";
-
-import "./assets/global.scss";
-
 import { useRegisterSW } from "virtual:pwa-register/vue";
+import App from "./App.vue";
+import "./assets/global.scss";
 
 useRegisterSW({
   immediate: true,
