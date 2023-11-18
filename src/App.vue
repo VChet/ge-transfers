@@ -1,4 +1,8 @@
 <template>
+  <header>
+    Обратная связь:
+    <a href="https://t.me/feedback_void_bot">Telegram</a>
+  </header>
   <main>
     <list-filters v-model="filters" />
     <div v-if="isLoading && !filteredList.length" class="status-card">Загрузка...</div>
@@ -56,6 +60,13 @@ const filteredList = computed(() =>
 </script>
 
 <style lang="scss">
+header {
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.25rem 2rem;
+}
+main {
+  padding: 2rem;
+}
 .filters {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -75,9 +86,7 @@ const filteredList = computed(() =>
   &-move,
   &-enter-active,
   &-leave-active {
-    transition:
-      transform 0.3s ease-out,
-      opacity 0.1s ease-in;
+    transition: transform 0.3s ease-out, opacity 0.1s ease-in;
   }
   &-enter-from,
   &-leave-to {
