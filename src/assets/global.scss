@@ -1,31 +1,28 @@
 @font-face {
   font-family: Gilroy;
-  font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-weight: normal;
   src: url('/fonts/Gilroy-Regular.woff2') format('woff2'),
     url('/fonts/Gilroy-Regular.woff') format('woff');
+  font-display: swap;
 }
-
 :root {
-  --color-background: #ffffff;
-  --color-text: #000000;
+  --color-background: #fff;
+  --color-text: #000;
   --highlight: #00b7ff;
   --color-border: #e1e1e1;
   --color-negative: #ff652f;
   --color-positive: #5bc5a7;
   --border-radius: 16px;
 }
-
 *,
 *::before,
 *::after {
+  position: relative;
   box-sizing: border-box;
   margin: 0;
-  position: relative;
   font-weight: normal;
 }
-
 body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -35,44 +32,41 @@ body {
   color: var(--color-text);
   background-color: var(--color-background);
 }
-
 ul {
-  list-style: none;
   padding: 0;
   margin: 0;
+  list-style: none;
 }
-
 select {
-  appearance: none;
-  font-family: inherit;
-  border-color: var(--color-border);
-  border-radius: 0.25em;
   padding: 0.25em 0.5em;
+  font-family: inherit;
   font-size: 1.25rem;
-  cursor: pointer;
-  outline: none;
   line-height: 1.1;
   color: var(--color-text);
+  appearance: none;
+  cursor: pointer;
   background-color: var(--color-background);
+  border-color: var(--color-border);
+  border-radius: 0.25em;
+  outline: none;
   &:hover,
   &:focus-visible {
     outline: 1px solid var(--highlight);
   }
 }
-
 button {
-  appearance: none;
+  padding: 0.5em 0.75em;
   font-family: inherit;
+  font-size: 16px;
+  line-height: 1.1;
+  color: var(--color-text);
+  white-space: nowrap;
+  appearance: none;
+  cursor: pointer;
+  background-color: var(--color-background);
   border: 1px solid var(--color-border);
   border-radius: 0.25em;
-  padding: 0.5em 0.75em;
-  font-size: 16px;
-  cursor: pointer;
   outline: none;
-  line-height: 1.1;
-  white-space: nowrap;
-  color: var(--color-text);
-  background-color: var(--color-background);
   &:hover,
   &:focus-visible {
     outline: 1px solid var(--highlight);
@@ -80,50 +74,47 @@ button {
   &:active {
     transform: scale(0.95);
   }
-  @media (max-width: 500px) {
+
+  @media (width <= 500px) {
     font-size: 12px;
   }
 }
-
 textarea {
-  resize: vertical;
   width: 100%;
-  font-family: inherit;
-  border: 1px solid var(--color-border);
-  border-radius: 0.25em;
-  padding: 0.5em;
-  outline: none;
   min-height: 75px;
   max-height: 200px;
+  padding: 0.5em;
+  font-family: inherit;
+  resize: vertical;
+  border: 1px solid var(--color-border);
+  border-radius: 0.25em;
+  outline: none;
   &:hover,
   &:focus-visible {
     outline: 1px solid var(--highlight);
   }
 }
-
 #app {
   max-width: 1280px;
-  margin: 0 auto;
   padding: 2rem;
+  margin: 0 auto;
   font-weight: normal;
 }
-
 .image {
   width: 100px;
   height: 100px;
   object-fit: contain;
   border-radius: var(--border-radius);
-  @media (max-width: 500px) {
+
+  @media (width <= 500px) {
     width: 65px;
     height: 65px;
   }
 }
-
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.5s ease;
 }
-
 .v-enter-from,
 .v-leave-to {
   opacity: 0;

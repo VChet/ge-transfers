@@ -21,7 +21,8 @@ export default defineComponent({ name: "LoadingSpinner" });
   bottom: 20px;
   width: 60px;
   height: 13px;
-  @media (max-width: 1400px) {
+
+  @media (width <= 1400px) {
     right: 50%;
     transform: translateX(50%);
   }
@@ -30,8 +31,8 @@ export default defineComponent({ name: "LoadingSpinner" });
     top: 0;
     width: 13px;
     height: 13px;
-    border-radius: var(--border-radius);
     background: var(--highlight);
+    border-radius: var(--border-radius);
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
     &:nth-child(1) {
       left: 0;
@@ -51,6 +52,7 @@ export default defineComponent({ name: "LoadingSpinner" });
     }
   }
 }
+
 @keyframes ellipsis1 {
   0% {
     transform: scale(0);
@@ -59,6 +61,7 @@ export default defineComponent({ name: "LoadingSpinner" });
     transform: scale(1);
   }
 }
+
 @keyframes ellipsis2 {
   0% {
     transform: translate(0, 0);
@@ -67,6 +70,7 @@ export default defineComponent({ name: "LoadingSpinner" });
     transform: translate(24px, 0);
   }
 }
+
 @keyframes ellipsis3 {
   0% {
     transform: scale(1);

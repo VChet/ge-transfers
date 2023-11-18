@@ -63,9 +63,9 @@ const filteredList = computed(() =>
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 12px;
   padding: 12px 20px 20px;
+  margin-bottom: 12px;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
-  margin-bottom: 12px;
   legend {
     font-size: 18px;
   }
@@ -91,9 +91,9 @@ const filteredList = computed(() =>
 }
 .status-card {
   padding: 12px;
+  font-size: 20px;
+  text-align: center;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
-  text-align: center;
-  font-size: 20px;
 }
 </style>

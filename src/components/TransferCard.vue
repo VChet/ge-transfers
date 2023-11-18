@@ -83,13 +83,12 @@ async function sendFeedback(vote: FeedbackVote) {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 16px 0;
-  justify-items: center;
-  align-items: center;
+  place-items: center;
   padding: 12px 24px;
+  font-size: 20px;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   transition: transform 0.3s linear;
-  font-size: 20px;
   will-change: transform, opacity;
   &:hover {
     box-shadow: 0 0 3px var(--highlight);
@@ -103,15 +102,16 @@ async function sendFeedback(vote: FeedbackVote) {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    @media (max-width: 575px) {
+
+    @media (width <= 575px) {
       align-items: center;
       text-align: center;
     }
     &-row {
-      width: 100%;
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      width: 100%;
       > button {
         flex: 1;
       }
@@ -128,7 +128,8 @@ async function sendFeedback(vote: FeedbackVote) {
       color: var(--color-positive);
     }
   }
-  @media (max-width: 850px) {
+
+  @media (width <= 850px) {
     grid-template-columns: repeat(2, 1fr);
     &__feedback {
       grid-column: 1 / -1;
@@ -137,9 +138,10 @@ async function sendFeedback(vote: FeedbackVote) {
       }
     }
   }
-  @media (max-width: 500px) {
-    padding: 12px 16px;
+
+  @media (width <= 500px) {
     gap: 6px 12px;
+    padding: 12px 16px;
     font-size: 14px;
   }
 }

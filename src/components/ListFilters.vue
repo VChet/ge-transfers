@@ -47,13 +47,14 @@ const receiveOptions: { name: string; value: ReceiveType }[] = [
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 12px;
   padding: 12px 20px 20px;
+  margin-bottom: 12px;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
-  margin-bottom: 12px;
   legend {
     font-size: 18px;
   }
-  @media (max-width: 500px) {
+
+  @media (width <= 500px) {
     padding: 6px 10px 10px;
   }
 }
