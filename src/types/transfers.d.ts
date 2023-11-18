@@ -12,7 +12,6 @@ export interface Transfer {
   upVotes?: number;
   downVotes?: number;
   rating?: number;
-  disabled?: boolean;
 }
 
 export interface FilterValues {
