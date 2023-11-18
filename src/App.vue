@@ -61,8 +61,8 @@ const filteredList = computed(() =>
 
 <style lang="scss">
 header {
-  border-bottom: 1px solid var(--color-border);
   padding: 0.25rem 2rem;
+  border-bottom: 1px solid var(--color-border);
 }
 main {
   padding: 2rem;
@@ -86,7 +86,9 @@ main {
   &-move,
   &-enter-active,
   &-leave-active {
-    transition: transform 0.3s ease-out, opacity 0.1s ease-in;
+    transition:
+      transform 0.3s ease-out,
+      opacity 0.1s ease-in;
   }
   &-enter-from,
   &-leave-to {
