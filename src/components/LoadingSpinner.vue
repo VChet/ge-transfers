@@ -1,12 +1,10 @@
 <template>
-  <Transition>
-    <div class="loading-spinner">
-      <div />
-      <div />
-      <div />
-      <div />
-    </div>
-  </Transition>
+  <div class="loading-spinner">
+    <div />
+    <div />
+    <div />
+    <div />
+  </div>
 </template>
 
 <script lang="ts">

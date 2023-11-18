@@ -14,7 +14,7 @@ import InputSelect from "@/components/InputSelect.vue";
 import type { FilterValues, GeorgianBanks, ReceiveCurrency, ReceiveType, TransferSystem } from "@/types/transfers";
 
 const props = defineProps<{ modelValue: FilterValues }>();
-const emit = defineEmits<{ (e: "update:modelValue", value: number): void }>();
+const emit = defineEmits<(e: "update:modelValue", value: number) => void>();
 
 const filters = useVModel(props, "modelValue", emit);
 const bankOptions: { name: string; value: GeorgianBanks }[] = [

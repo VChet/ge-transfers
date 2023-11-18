@@ -52,7 +52,7 @@ import { FeedbackVote } from "@/types/transfersEnum";
 import type { Transfer } from "@/types/transfers";
 
 const props = defineProps<{ entry: Transfer }>();
-const emit = defineEmits<{ (e: "fetch"): void }>();
+const emit = defineEmits<(e: "fetch") => void>();
 const { textarea: textareaRef, input: feedbackText } = useTextareaAutosize();
 const leaveFeedback = ref<boolean>(false);
 const isSending = ref<boolean>(false);

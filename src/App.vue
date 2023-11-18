@@ -77,7 +77,9 @@ const filteredList = computed(() =>
   &-move,
   &-enter-active,
   &-leave-active {
-    transition: transform 0.3s ease-out, opacity 0.1s ease-in;
+    transition:
+      transform 0.3s ease-out,
+      opacity 0.1s ease-in;
   }
   &-enter-from,
   &-leave-to {
