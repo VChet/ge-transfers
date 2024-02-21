@@ -1,16 +1,16 @@
 <template>
   <header>
+    Последнее обновление: 21.02.24
     Обратная связь:
     <a href="https://t.me/feedback_void_bot">Telegram</a>
   </header>
   <main>
-    <list-filters v-model="filters" />
-    <div v-if="isLoading && !filteredList.length" class="status-card">Загрузка...</div>
+    <list-filters v-model="filters" :items="transfers" />
+    <div v-if="!filteredList.length" class="status-card">Загрузка...</div>
     <TransitionGroup v-else-if="filteredList.length" name="list" class="list" tag="ul">
-      <transfer-card v-for="transfer in filteredList" :key="transfer.id" :entry="transfer" @fetch="fetchData" />
+      <transfer-card v-for="transfer in filteredList" :key="transfer.id" :entry="transfer" />
     </TransitionGroup>
     <div v-else class="status-card">Ничего не найдено</div>
-    <loading-spinner v-show="isLoading" />
   </main>
 </template>
 
@@ -20,9 +20,7 @@ import { useStorage } from "@vueuse/core";
 import { nanoid } from "nanoid";
 import ListFilters from "@/components/ListFilters.vue";
 import TransferCard from "@/components/TransferCard.vue";
-import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import transfersData from "@/assets/transfers";
-import { fetchTransfers } from "@/requests";
 import type { FilterValues, Transfer } from "@/types/transfers";
 
 const filters = useStorage<FilterValues>("filters", {
@@ -32,14 +30,7 @@ const filters = useStorage<FilterValues>("filters", {
   receiveCurrency: ""
 });
 
-const isLoading = ref<boolean>(false);
 const transfers = ref<Transfer[]>(transfersData);
-async function fetchData() {
-  isLoading.value = true;
-  transfers.value = await fetchTransfers().finally(() => {
-    isLoading.value = false;
-  });
-}
 
 const filteredList = computed(() =>
   transfers.value

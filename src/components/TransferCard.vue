@@ -16,66 +16,17 @@
       />
       <img v-else class="image" src="/img/card.webp" alt="На карту" title="На карту" />
     </div>
-    <div v-if="'upVotes' in entry && 'downVotes' in entry" class="transfer-card__feedback">
-      <template v-if="!leaveFeedback">
-        <div class="transfer-card__feedback-count">
-          <div>
-            Не работает: <span class="transfer-card__feedback-negative">{{ entry.downVotes }}</span>
-          </div>
-          <div>
-            Работает: <span class="transfer-card__feedback-positive">{{ entry.upVotes }}</span>
-          </div>
-        </div>
-        <div>
-          <button type="button" @click="leaveFeedback = true">Оставить отзыв</button>
-        </div>
-      </template>
-      <template v-else>
-        <textarea ref="textareaRef" v-model="feedbackText" title="Вы можете оставить комментарий" />
-        <div class="transfer-card__feedback-row">
-          <button type="button" :disabled="isSending" @click="sendFeedback(FeedbackVote.negative)">Не работает</button>
-          <button type="button" :disabled="isSending" @click="sendFeedback(FeedbackVote.positive)">Работает</button>
-        </div>
-      </template>
-    </div>
   </li>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { useTextareaAutosize } from "@vueuse/core";
 import TransferSystem from "@/components/TransferSystem.vue";
 import RecipientBank from "@/components/RecipientBank.vue";
 import CurrencyRate from "@/components/CurrencyRate.vue";
-import { postFeedback } from "@/requests";
-import { FeedbackVote } from "@/types/transfersEnum";
 import type { Transfer } from "@/types/transfers";
 
-const props = defineProps<{ entry: Transfer }>();
-const emit = defineEmits<(e: "fetch") => void>();
-const { textarea: textareaRef, input: feedbackText } = useTextareaAutosize();
-const leaveFeedback = ref<boolean>(false);
-const isSending = ref<boolean>(false);
-
-async function sendFeedback(vote: FeedbackVote) {
-  isSending.value = true;
-  if (!props.entry.id) {
-    throw new Error("entry id is undefined");
-  }
-  try {
-    await postFeedback({
-      methodId: props.entry.id,
-      comment: feedbackText.value ?? null,
-      vote
-    });
-    emit("fetch");
-    leaveFeedback.value = false;
-    feedbackText.value = "";
-  } catch (error) {
-    alert("Ошибка");
-  }
-  isSending.value = false;
-}
+defineProps<{ entry: Transfer }>();
+defineEmits<(e: "fetch") => void>();
 </script>
 
 <style lang="scss">

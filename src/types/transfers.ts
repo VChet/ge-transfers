@@ -1,5 +1,13 @@
-export type GeorgianBanks = "Bank of Georgia" | "TBC" | "Credo" | "Liberty" | "Rico" | "Cartu";
-export type TransferSystem = "Contact" | "Unistream" | "KoronaPay";
+export type GeorgianBanks = |
+  "Bank of Georgia" |
+  "TBC" |
+  "Credo" |
+  "Liberty" |
+  "Rico Credit" |
+  "CartuBank" |
+  "BasisBank" |
+  "Halyk Bank";
+export type TransferSystem = "KoronaPay";
 export type ReceiveType = "Card" | "Cash";
 export type ReceiveCurrency = "GEL" | "USD" | "EUR";
 

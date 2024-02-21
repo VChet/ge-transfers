@@ -12,10 +12,6 @@ import type { TransferSystem } from "@/types/transfers";
 const props = defineProps<{ name: TransferSystem }>();
 const src = computed(() => {
   switch (props.name) {
-    case "Unistream":
-      return "/img/unistream.webp";
-    case "Contact":
-      return "/img/contact.webp";
     case "KoronaPay":
       return "/img/koronapay.webp";
     default:

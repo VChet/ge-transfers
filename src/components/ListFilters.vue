@@ -11,30 +11,34 @@
 <script setup lang="ts">
 import { useVModel } from "@vueuse/core";
 import InputSelect from "@/components/InputSelect.vue";
-import type { FilterValues, GeorgianBanks, ReceiveCurrency, ReceiveType, TransferSystem } from "@/types/transfers";
+import type { FilterValues, GeorgianBanks, ReceiveCurrency, ReceiveType, Transfer, TransferSystem } from "@/types/transfers";
+import { computed } from "vue";
 
-const props = defineProps<{ modelValue: FilterValues }>();
+const props = defineProps<{ modelValue: FilterValues, items: Transfer[] }>();
 const emit = defineEmits<(e: "update:modelValue", value: number) => void>();
 
 const filters = useVModel(props, "modelValue", emit);
-const bankOptions: { name: string; value: GeorgianBanks }[] = [
-  { name: "Bank of Georgia", value: "Bank of Georgia" },
-  { name: "TBC", value: "TBC" },
-  { name: "Credo", value: "Credo" },
-  { name: "Liberty", value: "Liberty" },
-  { name: "Rico", value: "Rico" },
-  { name: "Cartu", value: "Cartu" }
-];
-const systemOptions: { name: string; value: TransferSystem }[] = [
-  { name: "Contact", value: "Contact" },
-  { name: "Unistream", value: "Unistream" },
-  { name: "KoronaPay", value: "KoronaPay" }
-];
-const currencyOptions: { name: string; value: ReceiveCurrency }[] = [
-  { name: "GEL", value: "GEL" },
-  { name: "USD", value: "USD" },
-  { name: "EUR", value: "EUR" }
-];
+const bankOptions = computed<{ name: string; value: GeorgianBanks }[]>(() => {
+  const options = new Set<GeorgianBanks>();
+  for (const item of props.items) {
+    if (item.recipientBank) { options.add(item.recipientBank); }
+  }
+  return [...options].map((name) => ({ name, value: name }));
+})
+const systemOptions = computed<{ name: string; value: TransferSystem }[]>(() => {
+  const options = new Set<TransferSystem>();
+  for (const item of props.items) {
+    if (item.transferSystem) { options.add(item.transferSystem); }
+  }
+  return [...options].map((name) => ({ name, value: name }));
+});
+const currencyOptions = computed<{ name: string; value: ReceiveCurrency }[]>(() => {
+  const options = new Set<ReceiveCurrency>();
+  for (const item of props.items) {
+    if (item.receiveCurrency) { options.add(item.receiveCurrency); }
+  }
+  return [...options].map((name) => ({ name, value: name }));
+});
 const receiveOptions: { name: string; value: ReceiveType }[] = [
   { name: "На карту", value: "Card" },
   { name: "В отделении", value: "Cash" }

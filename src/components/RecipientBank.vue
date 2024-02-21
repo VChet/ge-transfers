@@ -20,10 +20,14 @@ const src = computed(() => {
       return "/img/credo.webp";
     case "Liberty":
       return "/img/liberty.webp";
-    case "Rico":
+    case "Rico Credit":
       return "/img/rico.webp";
-    case "Cartu":
+    case "CartuBank":
       return "/img/cartu.webp";
+    case "BasisBank":
+      return "/img/basis.webp";
+    case "Halyk Bank":
+      return "/img/halyk.webp";
     default:
       return props.name;
   }
