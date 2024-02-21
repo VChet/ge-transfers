@@ -6,3 +6,11 @@ declare module "*.vue" {
   const Component: ComponentOptions;
   export default Component;
 }
+
+interface ImportMetaEnv {
+  readonly VITE_GIT_COMMIT_DATE: string
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}

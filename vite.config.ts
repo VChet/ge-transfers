@@ -1,4 +1,5 @@
 import { URL, fileURLToPath } from "node:url";
+import { execSync } from "node:child_process";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { VitePWA } from "vite-plugin-pwa";
@@ -36,6 +37,8 @@ const pwaOptions: Partial<VitePWAOptions> = {
   workbox: { sourcemap: true }
 };
 
+const commitDate = execSync("git log -1 --format=%cI").toString().trimEnd();
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue(), VitePWA(pwaOptions)],
@@ -44,7 +47,11 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url))
     }
   },
+  define: {
+    "import.meta.env.VITE_GIT_COMMIT_DATE": JSON.stringify(commitDate)
+  },
   server: {
+    port: 7100,
     proxy: {
       "/api": {
         target: "https://playground1.vps.webdock.cloud/getransfers/dyn",
