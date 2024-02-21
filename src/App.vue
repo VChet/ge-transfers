@@ -6,16 +6,19 @@
   </header>
   <main>
     <list-filters v-model="filters" :items="transfers" />
-    <div v-if="!filteredList.length" class="status-card">Загрузка...</div>
+    <div v-if="!filteredList.length" class="status-card">
+      Загрузка...
+    </div>
     <TransitionGroup v-else-if="filteredList.length" name="list" class="list" tag="ul">
       <transfer-card v-for="transfer in filteredList" :key="transfer.id" :entry="transfer" />
     </TransitionGroup>
-    <div v-else class="status-card">Ничего не найдено</div>
+    <div v-else class="status-card">
+      Ничего не найдено
+    </div>
   </main>
 </template>
-
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { computed, ref } from "vue";
 import { useStorage } from "@vueuse/core";
 import { nanoid } from "nanoid";
 import ListFilters from "@/components/ListFilters.vue";
@@ -41,15 +44,9 @@ const filteredList = computed(() =>
       if (filters.value.receiveCurrency && filters.value.receiveCurrency !== receiveCurrency) return false;
       return true;
     })
-    .map((entry) => ({
-      ...entry,
-      id: entry.id ?? nanoid(),
-      rating: (entry.upVotes ?? 0) - (entry.downVotes ?? 0)
-    }))
-    .sort((a, b) => b.rating - a.rating)
+    .map((entry) => ({ ...entry, id: nanoid() }))
 );
 </script>
-
 <style lang="scss">
 header {
   padding: 0.25rem 2rem;
@@ -60,20 +57,20 @@ main {
 }
 .filters {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 12px;
-  padding: 12px 20px 20px;
-  margin-bottom: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(9.375rem, 1fr));
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem 1.25rem;
+  margin-bottom: 0.75rem;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   legend {
-    font-size: 18px;
+    font-size: 1.125rem;
   }
 }
 .list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0.75rem;
   &-move,
   &-enter-active,
   &-leave-active {
@@ -92,8 +89,8 @@ main {
   }
 }
 .status-card {
-  padding: 12px;
-  font-size: 20px;
+  padding: 0.75rem;
+  font-size: 1.25rem;
   text-align: center;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);

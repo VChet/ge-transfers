@@ -13,7 +13,7 @@
   --color-border: #e1e1e1;
   --color-negative: #ff652f;
   --color-positive: #5bc5a7;
-  --border-radius: 16px;
+  --border-radius: 1rem;
 }
 *,
 *::before,
@@ -74,15 +74,14 @@ button {
   &:active {
     transform: scale(0.95);
   }
-
   @media (width <= 500px) {
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 }
 textarea {
   width: 100%;
-  min-height: 75px;
-  max-height: 200px;
+  min-height: 4.6875rem;
+  max-height: 12.5rem;
   padding: 0.5em;
   font-family: inherit;
   resize: vertical;
@@ -95,19 +94,18 @@ textarea {
   }
 }
 #app {
-  max-width: 1280px;
+  max-width: 80rem;
   margin: 0 auto;
   font-weight: normal;
 }
 .image {
-  width: 100px;
-  height: 100px;
+  width: 6.25rem;
+  height: 6.25rem;
   object-fit: contain;
   border-radius: var(--border-radius);
-
   @media (width <= 500px) {
-    width: 65px;
-    height: 65px;
+    width: 4.0625rem;
+    height: 4.0625rem;
   }
 }
 .v-enter-active,

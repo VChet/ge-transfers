@@ -4,7 +4,7 @@
     <recipient-bank :name="entry.recipientBank" />
     <div class="transfer-card__currency">
       {{ entry.receiveCurrency }}
-      <currency-rate :name="entry.transferSystem" :currency="entry.receiveCurrency" />
+      <currency-rate :currency="entry.receiveCurrency" />
     </div>
     <div class="transfer-card__type">
       <img
@@ -13,12 +13,11 @@
         src="/img/cash.webp"
         alt="В отделении"
         title="В отделении"
-      />
-      <img v-else class="image" src="/img/card.webp" alt="На карту" title="На карту" />
+      >
+      <img v-else class="image" src="/img/card.webp" alt="На карту" title="На карту">
     </div>
   </li>
 </template>
-
 <script setup lang="ts">
 import TransferSystem from "@/components/TransferSystem.vue";
 import RecipientBank from "@/components/RecipientBank.vue";
@@ -26,23 +25,21 @@ import CurrencyRate from "@/components/CurrencyRate.vue";
 import type { Transfer } from "@/types/transfers";
 
 defineProps<{ entry: Transfer }>();
-defineEmits<(e: "fetch") => void>();
 </script>
-
 <style lang="scss">
 .transfer-card {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 16px 0;
+  grid-template-columns: repeat(auto-fit, minmax(9.375rem, 1fr));
+  gap: 1rem 0;
   place-items: center;
-  padding: 12px 24px;
-  font-size: 20px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   transition: transform 0.3s linear;
   will-change: transform, opacity;
   &:hover {
-    box-shadow: 0 0 3px var(--highlight);
+    box-shadow: 0 0 0.1875rem var(--highlight);
   }
   &__currency,
   &__type,
@@ -52,8 +49,7 @@ defineEmits<(e: "fetch") => void>();
   &__feedback {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-
+    gap: 0.5rem;
     @media (width <= 575px) {
       align-items: center;
       text-align: center;
@@ -61,7 +57,7 @@ defineEmits<(e: "fetch") => void>();
     &-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 0.5rem;
       width: 100%;
       > button {
         flex: 1;
@@ -79,7 +75,6 @@ defineEmits<(e: "fetch") => void>();
       color: var(--color-positive);
     }
   }
-
   @media (width <= 850px) {
     grid-template-columns: repeat(2, 1fr);
     &__feedback {
@@ -89,11 +84,10 @@ defineEmits<(e: "fetch") => void>();
       }
     }
   }
-
   @media (width <= 500px) {
-    gap: 6px 12px;
-    padding: 12px 16px;
-    font-size: 14px;
+    gap: 0.375rem 0.75rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
   }
 }
 </style>

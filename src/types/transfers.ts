@@ -12,19 +12,16 @@ export type ReceiveType = "Card" | "Cash";
 export type ReceiveCurrency = "GEL" | "USD" | "EUR";
 
 export interface Transfer {
-  id?: string;
-  recipientBank: GeorgianBanks;
-  transferSystem: TransferSystem;
-  receiveType: ReceiveType;
-  receiveCurrency: ReceiveCurrency;
-  upVotes?: number;
-  downVotes?: number;
-  rating?: number;
+  id?: string
+  recipientBank: GeorgianBanks
+  transferSystem: TransferSystem
+  receiveType: ReceiveType
+  receiveCurrency: ReceiveCurrency
 }
 
 export interface FilterValues {
-  recipientBank: GeorgianBanks | "";
-  transferSystem: TransferSystem | "";
-  receiveType: ReceiveType | "";
-  receiveCurrency: ReceiveCurrency | "";
+  recipientBank: GeorgianBanks | ""
+  transferSystem: TransferSystem | ""
+  receiveType: ReceiveType | ""
+  receiveCurrency: ReceiveCurrency | ""
 }
