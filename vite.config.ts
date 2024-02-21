@@ -15,6 +15,8 @@ const pwaOptions: Partial<VitePWAOptions> = {
     name: "Переводы в Грузию",
     short_name: "Переводы в Грузию",
     description: "Доступные способы денежных переводов в Грузию",
+    theme_color: "#ffffff",
+    background_color: "#ffffff",
     icons: [
       {
         src: "icon-192x192.png",
@@ -51,13 +53,6 @@ export default defineConfig({
     "import.meta.env.VITE_GIT_COMMIT_DATE": JSON.stringify(commitDate)
   },
   server: {
-    port: 7100,
-    proxy: {
-      "/api": {
-        target: "https://playground1.vps.webdock.cloud/getransfers/dyn",
-        rewrite: (path) => path.replace(/^\/api/, ""),
-        changeOrigin: true
-      }
-    }
+    port: 7100
   }
 });
