@@ -11,10 +11,11 @@
 </template>
 <script setup lang="ts">
 import { useVModel } from "@vueuse/core";
+import type { SelectHTMLAttributes } from "vue";
 
 interface InputSelectProps {
-  modelValue: string | number
-  items: Record<string, any>[]
+  modelValue: SelectHTMLAttributes["value"]
+  items: Record<string, unknown>[]
   label: string | null
   itemValue?: string
   itemText?: string
