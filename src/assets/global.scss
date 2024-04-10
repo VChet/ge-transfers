@@ -8,11 +8,19 @@
 :root {
   --color-background: #fff;
   --color-text: #000;
-  --highlight: #00b7ff;
+  --highlight: #2f81f7;
   --color-border: #e1e1e1;
   --color-negative: #ff652f;
   --color-positive: #5bc5a7;
   --border-radius: 1rem;
+  @media (prefers-color-scheme: dark) {
+    --color-background: #19191a;
+    --color-text: #aaa;
+    --highlight: #00b7ff;
+    --color-border: #2f2f31;
+    --color-negative: #ff652f;
+    --color-positive: #5bc5a7;
+  }
 }
 *,
 *::before,
@@ -91,6 +99,9 @@ textarea {
   &:focus-visible {
     outline: 1px solid var(--highlight);
   }
+}
+a {
+  color: var(--highlight);
 }
 #app {
   max-width: 80rem;

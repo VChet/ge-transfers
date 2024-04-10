@@ -39,7 +39,14 @@ defineProps<{ entry: Transfer }>();
   transition: transform 0.3s linear;
   will-change: transform, opacity;
   &:hover {
-    box-shadow: 0 0 0.1875rem var(--highlight);
+    box-shadow: 0 0 0.25rem var(--highlight);
+  }
+  &__type {
+    display: flex;
+    place-items: center;
+    padding: 0.25rem;
+    background-color: #fff;
+    border-radius: var(--border-radius);
   }
   &__currency,
   &__type,
