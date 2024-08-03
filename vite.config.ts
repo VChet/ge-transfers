@@ -39,7 +39,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
   workbox: { sourcemap: true }
 };
 
-const commitDate = execSync("git log -1 --format=%cI").toString().trimEnd();
+const transfersUpdate = execSync("git log -1 --format=%cI src/assets/transfers.ts").toString().trimEnd();
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -50,7 +50,7 @@ export default defineConfig({
     }
   },
   define: {
-    "import.meta.env.VITE_GIT_COMMIT_DATE": JSON.stringify(commitDate)
+    "import.meta.env.VITE_TRANSFERS_UPDATE": JSON.stringify(transfersUpdate)
   },
   server: {
     port: 7100

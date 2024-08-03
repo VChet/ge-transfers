@@ -1,13 +1,5 @@
 <template>
-  <header>
-    <span>
-      Последнее обновление: {{ commitDate }}
-    </span>
-    <span>
-      Обратная связь:
-      <a href="https://t.me/feedback_void_bot">Telegram</a>
-    </span>
-  </header>
+  <main-header />
   <main>
     <list-filters v-model="filters" :items="transfers" />
     <div v-if="!filteredList.length" class="status-card">
@@ -25,13 +17,11 @@
 import { computed, ref } from "vue";
 import { useStorage } from "@vueuse/core";
 import { nanoid } from "nanoid";
-import dayjs from "dayjs";
+import MainHeader from "@/components/MainHeader.vue";
 import ListFilters from "@/components/ListFilters.vue";
 import TransferCard from "@/components/TransferCard.vue";
 import transfersData from "@/assets/transfers";
 import type { FilterValues, Transfer } from "@/types/transfers";
-
-const commitDate = dayjs(import.meta.env.VITE_GIT_COMMIT_DATE).format("DD.MM.YY");
 
 const filters = useStorage<FilterValues>("filters", {
   recipientBank: "",
