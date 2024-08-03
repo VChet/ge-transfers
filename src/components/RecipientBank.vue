@@ -29,16 +29,17 @@ function getImageUrl(bank: GeorgianBank) {
 </script>
 <style lang="scss">
 .recipient-banks {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
   gap: 1rem 1.5rem;
+  width: 100%;
   &__bank {
     display: inline-flex;
     gap: 0.5rem;
     align-items: center;
     img {
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 3rem;
+      height: 3rem;
       border-radius: 0.5rem;
     }
   }

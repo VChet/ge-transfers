@@ -29,8 +29,8 @@ defineProps<{ entry: Transfer }>();
 <style lang="scss">
 .transfer-card {
   display: grid;
-  grid-template-columns: 1fr .5fr 1fr 2fr;
-  gap: 1rem 0;
+  grid-template-columns: 1fr .5fr 1fr 3fr;
+  row-gap: 1rem;
   place-items: center;
   padding: 0.75rem 1.5rem;
   font-size: 1.25rem;
@@ -49,52 +49,15 @@ defineProps<{ entry: Transfer }>();
     border-radius: var(--border-radius);
   }
   &__currency,
-  &__type,
-  &__feedback {
+  &__type {
     text-align: center;
   }
-  &__feedback {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    @media (width <= 575px) {
-      align-items: center;
-      text-align: center;
-    }
-    &-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      width: 100%;
-      > button {
-        flex: 1;
-      }
-    }
-    &-count {
-      font-size: 16px;
-      font-feature-settings: "tnum";
-      font-variant-numeric: tabular-nums;
-    }
-    &-negative {
-      color: var(--color-negative);
-    }
-    &-positive {
-      color: var(--color-positive);
-    }
-  }
   @media (width <= 850px) {
-    grid-template-columns: repeat(2, 1fr);
-    &__feedback {
-      grid-column: 1 / -1;
-      &-count {
-        font-size: inherit;
-      }
-    }
+    grid-template-columns: 1fr;
+    row-gap: 1.5rem;
   }
   @media (width <= 500px) {
-    gap: 0.375rem 0.75rem;
-    padding: 0.75rem 1rem;
-    font-size: 0.875rem;
+    row-gap: 1rem;
   }
 }
 </style>
