@@ -1,7 +1,6 @@
 <template>
   <li class="transfer-card">
     <transfer-system :name="entry.transferSystem" />
-    <recipient-bank :name="entry.recipientBank" />
     <div class="transfer-card__currency">
       {{ entry.receiveCurrency }}
       <currency-rate :currency="entry.receiveCurrency" />
@@ -16,6 +15,7 @@
       >
       <img v-else class="image" src="/img/card.webp" alt="На карту" title="На карту">
     </div>
+    <recipient-bank :banks="entry.recipientBank" />
   </li>
 </template>
 <script setup lang="ts">
@@ -29,7 +29,7 @@ defineProps<{ entry: Transfer }>();
 <style lang="scss">
 .transfer-card {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9.375rem, 1fr));
+  grid-template-columns: 1fr .5fr 1fr 2fr;
   gap: 1rem 0;
   place-items: center;
   padding: 0.75rem 1.5rem;

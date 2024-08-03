@@ -2,22 +2,22 @@
   <fieldset class="list-filters">
     <legend>Фильтры</legend>
     <input-select v-model="filters.transferSystem" label="Система переводов" :items="systemOptions" />
-    <input-select v-model="filters.recipientBank" label="Банк получения" :items="bankOptions" />
     <input-select v-model="filters.receiveCurrency" label="Валюта" :items="currencyOptions" />
     <input-select v-model="filters.receiveType" label="Получение" :items="receiveOptions" />
+    <input-select v-model="filters.recipientBank" label="Банк получения" :items="bankOptions" />
   </fieldset>
 </template>
 <script setup lang="ts">
 import { onBeforeMount, ref } from "vue";
 import { useVModel } from "@vueuse/core";
 import InputSelect from "@/components/InputSelect.vue";
-import type { FilterValues, GeorgianBanks, ReceiveCurrency, ReceiveType, Transfer, TransferSystem } from "@/types/transfers";
+import type { FilterValues, GeorgianBank, ReceiveCurrency, ReceiveType, Transfer, TransferSystem } from "@/types/transfers";
 
 const props = defineProps<{ modelValue: FilterValues, items: Transfer[] }>();
 const emit = defineEmits<{ "update:modelValue": [value: FilterValues] }>();
 
 const filters = useVModel(props, "modelValue", emit);
-const bankOptions = ref<{ name: string, value: GeorgianBanks }[]>([]);
+const bankOptions = ref<{ name: string, value: GeorgianBank }[]>([]);
 const systemOptions = ref<{ name: string, value: TransferSystem }[]>([]);
 const currencyOptions = ref<{ name: string, value: ReceiveCurrency }[]>([]);
 const receiveOptions: { name: string, value: ReceiveType }[] = [
@@ -26,11 +26,11 @@ const receiveOptions: { name: string, value: ReceiveType }[] = [
 ];
 
 onBeforeMount(() => {
-  const banks = new Set<GeorgianBanks>();
+  const banks = new Set<GeorgianBank>();
   const systems = new Set<TransferSystem>();
   const currency = new Set<ReceiveCurrency>();
   for (const { recipientBank, transferSystem, receiveCurrency } of props.items) {
-    banks.add(recipientBank);
+    recipientBank.forEach((name) => banks.add(name));
     systems.add(transferSystem);
     currency.add(receiveCurrency);
   }

@@ -12,6 +12,8 @@ const props = defineProps<{ name: TransferSystem }>();
 const src = computed(() => {
   switch (props.name) {
     case "KoronaPay": return "/img/koronapay.webp";
+    case "Сбер": return "/img/sber.webp";
+    case "МТС": return "/img/mts.webp";
     default: return props.name;
   }
 });

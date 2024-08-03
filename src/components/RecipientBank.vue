@@ -1,16 +1,17 @@
 <template>
-  <div class="recipient-bank">
-    <img class="image" :src="src" :alt="name" :title="name">
-    <span class="recipient-bank__name">{{ name }}</span>
-  </div>
+  <ul class="recipient-banks">
+    <li v-for="bank in banks" :key="bank" class="recipient-banks__bank">
+      <img class="image" :src="getImageUrl(bank)" :alt="bank" :title="bank">
+      <span class="recipient-bank__bank-name">{{ bank }}</span>
+    </li>
+  </ul>
 </template>
 <script setup lang="ts">
-import { computed } from "vue";
-import type { GeorgianBanks } from "@/types/transfers";
+import type { GeorgianBank } from "@/types/transfers";
 
-const props = defineProps<{ name: GeorgianBanks }>();
-const src = computed(() => {
-  switch (props.name) {
+defineProps<{ banks: GeorgianBank[] }>();
+function getImageUrl(bank: GeorgianBank) {
+  switch (bank) {
     case "Bank of Georgia": return "/img/bog.webp";
     case "TBC": return "/img/tbc.webp";
     case "Credo": return "/img/credo.webp";
@@ -19,16 +20,27 @@ const src = computed(() => {
     case "CartuBank": return "/img/cartu.webp";
     case "BasisBank": return "/img/basis.webp";
     case "Halyk Bank": return "/img/halyk.webp";
-    default: return props.name;
+    case "Crystal": return "/img/crystal.webp";
+    case "Intel Express": return "/img/intelexpress.webp";
+    case "Terabank": return "/img/terabank.webp";
+    default: return bank;
   }
-});
+}
 </script>
 <style lang="scss">
-.recipient-bank {
-  display: inline-flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  align-items: center;
-  text-align: center;
+.recipient-banks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  &__bank {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    img {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 0.5rem;
+    }
+  }
 }
 </style>
