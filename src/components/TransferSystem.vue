@@ -1,6 +1,6 @@
 <template>
   <div class="transfer-system">
-    <img class="image" :src="src" :alt="name" :title="name">
+    <img class="image" :src :alt="name" :title="name">
     <span class="transfer-system__name">{{ name }}</span>
   </div>
 </template>

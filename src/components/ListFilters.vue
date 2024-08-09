@@ -10,8 +10,16 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from "vue";
 import { useVModel } from "@vueuse/core";
+import type {
+  FilterValues,
+  GeorgianBank,
+  ReceiveCurrency,
+  ReceiveType,
+  Transfer,
+  TransferSystem
+
+} from "@/types/transfers";
 import InputSelect from "@/components/InputSelect.vue";
-import type { FilterValues, GeorgianBank, ReceiveCurrency, ReceiveType, Transfer, TransferSystem } from "@/types/transfers";
 
 const props = defineProps<{ modelValue: FilterValues, items: Transfer[] }>();
 const emit = defineEmits<{ "update:modelValue": [value: FilterValues] }>();

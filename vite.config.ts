@@ -2,8 +2,7 @@ import { URL, fileURLToPath } from "node:url";
 import { execSync } from "node:child_process";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import { VitePWA } from "vite-plugin-pwa";
-import type { VitePWAOptions } from "vite-plugin-pwa";
+import { VitePWA, type VitePWAOptions } from "vite-plugin-pwa";
 
 const pwaOptions: Partial<VitePWAOptions> = {
   base: "/",
