@@ -13,17 +13,15 @@
 import { useVModel } from "@vueuse/core";
 import type { SelectHTMLAttributes } from "vue";
 
-interface InputSelectProps {
+interface Props {
   modelValue: SelectHTMLAttributes["value"]
   items: Record<string, unknown>[]
   label: string | null
   itemValue?: string
   itemText?: string
 }
-
-const props = withDefaults(defineProps<InputSelectProps>(), { itemValue: "value", itemText: "name" });
-
-const emit = defineEmits<{ "update:modelValue": [value: InputSelectProps["modelValue"]] }>();
+const props = withDefaults(defineProps<Props>(), { itemValue: "value", itemText: "name" });
+const emit = defineEmits<{ "update:modelValue": [value: Props["modelValue"]] }>();
 const model = useVModel(props, "modelValue", emit);
 </script>
 <style lang="scss">

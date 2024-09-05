@@ -21,8 +21,12 @@ import type {
 } from "@/types/transfers";
 import InputSelect from "@/components/InputSelect.vue";
 
-const props = defineProps<{ modelValue: FilterValues, items: Transfer[] }>();
-const emit = defineEmits<{ "update:modelValue": [value: FilterValues] }>();
+interface Props {
+  modelValue: FilterValues
+  items: Transfer[]
+}
+const props = defineProps<Props>();
+const emit = defineEmits<{ "update:modelValue": [value: Props["modelValue"]] }>();
 
 const filters = useVModel(props, "modelValue", emit);
 const bankOptions = ref<{ name: string, value: GeorgianBank }[]>([]);
