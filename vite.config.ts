@@ -1,7 +1,7 @@
-import { URL, fileURLToPath } from "node:url";
 import { execSync } from "node:child_process";
-import { defineConfig } from "vite";
+import { fileURLToPath, URL } from "node:url";
 import vue from "@vitejs/plugin-vue";
+import { defineConfig } from "vite";
 import { VitePWA, type VitePWAOptions } from "vite-plugin-pwa";
 
 const pwaOptions: Partial<VitePWAOptions> = {

@@ -19,8 +19,8 @@ import { useStorage } from "@vueuse/core";
 import { nanoid } from "nanoid";
 import transfersData from "@/assets/transfers";
 import type { FilterValues, Transfer } from "@/types/transfers";
-import MainHeader from "@/components/MainHeader.vue";
 import ListFilters from "@/components/ListFilters.vue";
+import MainHeader from "@/components/MainHeader.vue";
 import TransferCard from "@/components/TransferCard.vue";
 
 const filters = useStorage<FilterValues>("filters", {

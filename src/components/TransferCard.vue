@@ -20,9 +20,9 @@
 </template>
 <script setup lang="ts">
 import type { Transfer } from "@/types/transfers";
-import TransferSystem from "@/components/TransferSystem.vue";
-import RecipientBank from "@/components/RecipientBank.vue";
 import CurrencyRate from "@/components/CurrencyRate.vue";
+import RecipientBank from "@/components/RecipientBank.vue";
+import TransferSystem from "@/components/TransferSystem.vue";
 
 defineProps<{ entry: Transfer }>();
 </script>
