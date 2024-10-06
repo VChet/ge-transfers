@@ -40,20 +40,20 @@ export default antfu({
         ["parent", "sibling", "index"],
         "internal-type",
         ["parent-type", "sibling-type", "index-type"],
-        "vue-components",
         "side-effect",
+        "vue-components",
         "object",
         "unknown"
       ],
       customGroups: {
         value: {
           "vue": "vue",
-          "vue-libs": ["vue-router", "@vueuse/**/*"],
+          "vue-libs": ["vue-router", "vue-i18n", "@vueuse/**/*"],
           "vue-components": ["**/*.vue", "./**/*.vue", "../**/*.vue"]
         },
         type: {
           "vue": "vue",
-          "vue-libs": ["vue-router", "@vueuse/**/*"],
+          "vue-libs": ["vue-router", "vue-i18n", "@vueuse/**/*"],
           "vue-components": ["**/*.vue", "./**/*.vue", "../**/*.vue"]
         }
       },
@@ -75,13 +75,7 @@ export default antfu({
     "ts/consistent-indexed-object-style": "error",
     "ts/consistent-type-definitions": "off",
     "ts/no-shadow": "error",
-    "ts/no-unused-expressions": ["error", {
-      allowShortCircuit: true,
-      allowTaggedTemplates: true,
-      allowTernary: true
-    }],
     "unicorn/prefer-includes": "off",
-    "unused-imports/no-unused-vars": "off",
     "vue/attribute-hyphenation": ["error", "always"],
     "vue/block-order": ["error", { order: ["template", "script", "style"] }],
     "vue/comma-dangle": ["error", "never"],
