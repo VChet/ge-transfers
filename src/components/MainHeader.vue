@@ -1,7 +1,8 @@
 <template>
   <header class="main-header">
     <span>
-      Последнее обновление: {{ transfersUpdate }}
+      Данные обновлены
+      <time :datetime="transfersUpdate.toISOString()">{{ transfersUpdate.format("DD MMM YYYY") }}</time>
     </span>
     <span>
       Обратная связь:
@@ -12,7 +13,7 @@
 <script setup lang="ts">
 import dayjs from "dayjs";
 
-const transfersUpdate = dayjs(import.meta.env.VITE_TRANSFERS_UPDATE).format("DD.MM.YY");
+const transfersUpdate = dayjs(import.meta.env.VITE_TRANSFERS_UPDATE);
 </script>
 <style lang="scss">
 .main-header {
@@ -20,5 +21,8 @@ const transfersUpdate = dayjs(import.meta.env.VITE_TRANSFERS_UPDATE).format("DD.
   justify-content: space-between;
   padding: 0.25rem 2rem;
   border-bottom: 1px solid var(--color-border);
+  time {
+    white-space: nowrap;
+  }
 }
 </style>
