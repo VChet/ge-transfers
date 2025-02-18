@@ -15,11 +15,11 @@ export type ReceiveType = "Card" | "Cash";
 export type ReceiveCurrency = "GEL" | "USD" | "EUR";
 
 export interface Transfer {
-  id?: string
   recipientBank: GeorgianBank[]
   transferSystem: TransferSystem
   receiveType: ReceiveType
   receiveCurrency: ReceiveCurrency
+  id?: string
 }
 
 export interface FilterValues {
